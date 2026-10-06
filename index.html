@@ -1,42 +1,1270 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mento — Défis cyber</title>
 <style>
-:root{--bg:#07111f;--card:#101f35;--line:#294568;--text:#edf6ff;--muted:#a9bfda;--cyan:#49e5da;--purple:#9e7cff;--red:#ff6684;--amber:#ffcb66}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0,#192e54,transparent 35%),var(--bg);color:var(--text);font:16px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}button{font:inherit;color:inherit;cursor:pointer}.shell{max-width:1080px;margin:auto;padding:24px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:16px}.brand{font-weight:800;letter-spacing:.08em}.brand b{color:var(--cyan)}.quiet{background:none;border:1px solid var(--line);border-radius:99px;padding:8px 12px}.hero{text-align:center;padding:38px 12px 20px}.mascot{font-size:56px;filter:drop-shadow(0 0 15px #49e5da)}h1{font-size:clamp(2rem,6vw,3.8rem);margin:4px 0}.lead{color:var(--muted);max-width:680px;margin:auto}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:28px}.module,.panel{background:linear-gradient(145deg,#142641,#0d192d);border:1px solid var(--line);border-radius:18px;box-shadow:0 14px 40px #0004}.module{padding:22px;text-align:left;transition:.2s transform,.2s border}.module:hover,.module:focus-visible{transform:translateY(-3px);border-color:var(--cyan)}.num{color:var(--cyan);font-weight:700}.module h2{margin:8px 0}.module p{color:var(--muted);min-height:48px}.arrow{color:var(--cyan);font-weight:bold}.view{display:none}.view.active{display:block}.game-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin:22px 0}.back,.primary,.answer,.action{border:1px solid var(--cyan);background:#102c45;border-radius:10px;padding:10px 15px}.primary{background:var(--cyan);color:#062033;font-weight:800}.intro,.result{max-width:760px;margin:36px auto;padding:28px}.rules{background:#071625;border-left:3px solid var(--cyan);padding:14px;margin:18px 0}.progress{height:10px;background:#071625;border-radius:8px;overflow:hidden;margin:12px 0}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--purple));width:0%;transition:.3s}.hud{display:flex;justify-content:space-between;color:var(--muted);font-weight:700}.arena{height:410px;position:relative;overflow:hidden;background:repeating-linear-gradient(90deg,#0b1a2d 0 32%,#19304f 32.4% 33.2%);border:1px solid var(--line);border-radius:18px}.ship,.snake{position:absolute;font-size:34px;transition:left .15s,bottom .15s}.ship{bottom:20px;left:calc(50% - 17px)}.fall{position:absolute;font-size:28px;animation:fall 3.4s linear forwards}.breaker{height:410px;position:relative;overflow:hidden;background:linear-gradient(#0b1b31,#07111f);border:1px solid var(--line);border-radius:18px}.brickwall{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:12px}.gamebrick{height:22px;border-radius:7px;background:linear-gradient(135deg,var(--purple),var(--cyan));box-shadow:0 0 12px #49e5da66}.ball{position:absolute;font-size:22px;z-index:2}.paddle{position:absolute;bottom:18px;width:110px;height:16px;border-radius:10px;background:var(--cyan);box-shadow:0 0 15px #49e5da}.dino-run{height:300px;position:relative;overflow:hidden;background:linear-gradient(#11294a 0 74%,#4b6580 74% 76%,#0b192b 76%);border:1px solid var(--line);border-radius:18px}.dino{position:absolute;bottom:56px;left:16%;font-size:48px;transition:bottom .15s,transform .15s}.dino.jump{bottom:155px}.dino.duck{transform:scaleY(.58);transform-origin:bottom}.hazard{position:absolute;left:100%;bottom:56px;font-size:35px;animation:hazard 2.4s linear forwards}.hazard.air{bottom:120px}@keyframes hazard{to{transform:translateX(-125vw)}}@keyframes fall{to{transform:translateY(455px)}}.snake{font-size:30px}.brick{position:absolute;font-size:25px}.controls{display:flex;gap:10px;justify-content:center;margin:14px}.controls button{min-width:58px;font-size:20px}.feed{max-width:760px;margin:auto}.post{padding:18px;margin:14px 0}.meta{color:var(--cyan);font-size:.9em}.post p{margin:9px 0}.actions{display:flex;gap:8px;flex-wrap:wrap}.action{background:#12233a;border-color:var(--line)}.action:hover{border-color:var(--cyan)}.scene{min-height:260px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:20px}.risk{background:#0a1728;border:1px solid var(--line);border-radius:12px;padding:15px;text-align:left}.risk:hover,.risk:focus{border-color:var(--amber)}.risk small{display:block;color:var(--muted)}.modal{position:fixed;inset:0;background:#020812cc;display:grid;place-items:center;padding:16px;z-index:3}.modal[hidden]{display:none}.question{max-width:700px;width:100%;padding:25px}.answers{display:grid;gap:10px}.answer{text-align:left;background:#0b192a;border-color:var(--line)}.answer:hover{border-color:var(--cyan)}.feedback{margin-top:15px;padding:14px;border-radius:10px;background:#10283b}.good{border-left:4px solid var(--cyan)}.bad{border-left:4px solid var(--red)}.hidden{display:none!important}.tiny{color:var(--muted);font-size:.9rem}@media(max-width:650px){.shell{padding:15px}.grid{grid-template-columns:1fr}.arena{height:360px}.scene{grid-template-columns:1fr}.top{align-items:flex-start}.module p{min-height:0}}
-</style></head>
-<body><main class="shell"><header class="top"><div class="brand"><b>MENTO</b> / DÉFIS CYBER</div><button class="quiet" id="quiet">🔇 Mode silencieux : actif</button></header>
-<section id="home" class="view active"><div class="hero"><div class="mascot" aria-hidden="true">🤖</div><h1>Prêt·e à déjouer les pièges ?</h1><p class="lead">Je suis Mento, ton copilote cyber. Choisis une mission : 10 défis concrets, des retours immédiats et aucun compte à créer.</p></div><div class="grid" id="moduleGrid"></div></section>
-<section id="game" class="view"><div class="game-head"><button class="back" id="homeBtn">← Accueil</button><div><strong id="gameTitle"></strong><div class="tiny" id="gameHint"></div></div><div class="tiny">🔇 Sans son</div></div><div class="hud"><span id="counter">Questions : 0 / 10</span><span id="extra"></span></div><div class="progress"><i id="bar"></i></div><div id="stage"></div></section></main><div id="modal" class="modal" hidden></div>
+:root{--bg:#07111f;--card:#101f35;--line:#294568;--text:#edf6ff;--muted:#a9bfda;--cyan:#49e5da;--purple:#9e7cff;--red:#ff6684;--amber:#ffcb66;--green:#4be39a}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 80% 0,#192e54,transparent 35%),var(--bg);color:var(--text);font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+button{font:inherit;color:inherit;cursor:pointer}
+.shell{max-width:1000px;margin:auto;padding:20px}
+.top{display:flex;justify-content:space-between;gap:16px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:14px}
+.brand{font-weight:800;letter-spacing:.08em}.brand b{color:var(--cyan)}
+.quiet{background:none;border:1px solid var(--line);border-radius:99px;padding:8px 14px;font-size:.9rem}
+.quiet:hover{border-color:var(--cyan)}
+.view{display:none}.view.active{display:block}
+.hero{text-align:center;padding:30px 12px 10px}
+.mascot{font-size:56px;filter:drop-shadow(0 0 14px #49e5da99)}
+h1{font-size:clamp(1.8rem,5vw,3.2rem);margin:6px 0}
+.lead{color:var(--muted);max-width:660px;margin:auto}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:26px}
+.module{background:linear-gradient(145deg,#142641,#0d192d);border:1px solid var(--line);border-radius:18px;padding:22px;text-align:left;transition:.2s transform,.2s border;display:block;width:100%}
+.module:hover,.module:focus-visible{transform:translateY(-3px);border-color:var(--cyan);outline:none}
+.num{color:var(--cyan);font-weight:700}
+.module h2{margin:6px 0 2px;font-size:1.25rem}
+.module .game{color:var(--amber);font-weight:600;font-size:.95rem}
+.module p{color:var(--muted);margin:8px 0 12px;min-height:44px}
+.arrow{color:var(--cyan);font-weight:700}
+.best{float:right;font-size:.8rem;color:var(--green)}
+.game-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin:16px 0 10px}
+.tiny{color:var(--muted);font-size:.85rem}
+.hud{display:flex;justify-content:space-between;color:var(--cyan);font-weight:700;margin:6px 0}
+.progress{height:10px;background:#071625;border-radius:8px;overflow:hidden;margin-bottom:12px;border:1px solid var(--line)}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--purple));width:0;transition:width .3s}
+.stage{position:relative;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#06101d}
+canvas{display:block;width:100%;height:auto;touch-action:none;background:#06101d}
+.overlay{position:absolute;inset:0;background:rgba(2,8,18,.88);display:flex;align-items:center;justify-content:center;padding:14px;overflow:auto}
+.overlay[hidden]{display:none}
+.card{max-width:640px;width:100%;background:#0d1b30;border:1px solid var(--line);border-radius:16px;padding:20px 22px;text-align:center}
+.card h2{margin:4px 0 6px;font-size:1.6rem}
+.card p{color:var(--muted);margin:6px 0}
+.rules{text-align:left;background:#071625;border-left:3px solid var(--cyan);padding:10px 14px;margin:12px 0;border-radius:8px;font-size:.93rem}
+.rules li{margin:3px 0 3px 16px}.rules ul{margin:0;padding:0}
+.primary,.secondary{border-radius:10px;padding:11px 20px;border:1px solid var(--cyan);margin:4px}
+.primary{background:var(--cyan);color:#062033;font-weight:800}
+.secondary{background:#102c45}
+.score{font-size:2.6rem;font-weight:800;color:var(--cyan);margin:4px 0}
+.review{text-align:left;max-height:190px;overflow:auto;font-size:.88rem;margin-top:10px;border-top:1px solid var(--line);padding-top:8px}
+.review div{margin:6px 0;color:var(--muted)}.review b{color:var(--text)}
+.pad{display:flex;justify-content:center;gap:10px;margin-top:12px;flex-wrap:wrap}
+.pad button{min-width:64px;min-height:52px;font-size:1.3rem;background:#102c45;border:1px solid var(--cyan);border-radius:12px;touch-action:none;user-select:none}
+.pad button:active{background:var(--cyan);color:#062033}
+.padgrid{display:grid;grid-template-columns:repeat(3,64px);gap:6px;justify-content:center}
+.padgrid .u{grid-column:2}.padgrid .l{grid-column:1;grid-row:2}.padgrid .d{grid-column:2;grid-row:2}.padgrid .r{grid-column:3;grid-row:2}
+.modal{position:fixed;inset:0;background:#020812e6;display:grid;place-items:center;padding:16px;z-index:5}
+.modal[hidden]{display:none}
+.question{max-width:700px;width:100%;padding:24px;background:linear-gradient(145deg,#142641,#0d192d);border:1px solid var(--cyan);border-radius:18px;box-shadow:0 14px 40px #0006}
+.question h2{margin:6px 0 14px;font-size:1.3rem}
+.answers{display:grid;gap:10px}
+.answer{text-align:left;background:#0b192a;border:1px solid var(--line);border-radius:10px;padding:13px 14px}
+.answer:hover:not(:disabled){border-color:var(--cyan)}
+.answer.good{border-color:var(--green);background:#0e2c24}
+.answer.near{border-color:var(--amber);background:#2e2511}
+.answer.bad{border-color:var(--red);background:#331622}
+.answer:disabled{cursor:default;opacity:.95}
+.feedback{margin-top:14px;padding:12px 14px;border-left:4px solid var(--cyan);background:#071625;border-radius:8px}
+.feedback.ok{border-color:var(--green)}.feedback.ko{border-color:var(--red)}.feedback.mid{border-color:var(--amber)}
+.hidden{display:none!important}
+footer{color:var(--muted);text-align:center;font-size:.8rem;margin:26px 0 6px}
+@media(max-width:650px){.shell{padding:12px}.grid{grid-template-columns:1fr}.module p{min-height:0}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="shell">
+  <header class="top">
+    <div class="brand"><b>MENTO</b> / DÉFIS CYBER</div>
+    <button class="quiet" id="muteBtn" aria-pressed="false">🔇 Son : désactivé</button>
+  </header>
+
+  <!-- ACCUEIL -->
+  <section id="home" class="view active">
+    <div class="hero">
+      <div class="mascot" aria-hidden="true">🛡️</div>
+      <h1>Prêt·e à déjouer les pièges ?</h1>
+      <p class="lead">Je suis Mento, ton copilote cyber. Choisis un module : un mini-jeu, 10 défis tirés au hasard, aucun compte à créer et aucune donnée enregistrée.</p>
+    </div>
+    <div class="grid" id="moduleGrid"></div>
+    <footer>Les questions ne se répètent pas pendant une même session de jeu (tant que la page reste ouverte).</footer>
+  </section>
+
+  <!-- JEU -->
+  <section id="game" class="view">
+    <div class="game-head">
+      <button class="quiet" id="homeBtn">← Accueil</button>
+      <div style="text-align:center"><strong id="gameTitle"></strong><div class="tiny" id="gameHint"></div></div>
+      <div style="width:90px"></div>
+    </div>
+    <div class="hud"><span id="counter">Questions : 0 / 10</span><span id="extra"></span></div>
+    <div class="progress"><i id="bar"></i></div>
+    <div class="stage">
+      <canvas id="cv" width="720" height="480" aria-label="Zone de jeu"></canvas>
+      <div class="overlay" id="overlay"></div>
+    </div>
+    <div class="pad" id="pad"></div>
+  </section>
+</main>
+
+<!-- QUESTION -->
+<div id="modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="qtext"></div>
+<noscript>Ce jeu nécessite JavaScript.</noscript>
+
 <script>
-/* Banques modifiables : chaque entrée comporte exactement 3 réponses, la meilleure a ok:true. */
-const qs=(items)=>items.map(([q,a,b,c,e])=>({q,answers:[{t:a},{t:b},{t:c,ok:true}],e}));
-const BANKS={
-password:qs([
-['Pour le compte de l’association, quel mot de passe choisir ?','asso2026','Une phrase connue avec un chiffre','Une phrase de passe longue, unique et générée ou mémorisable','Un secret long et unique limite les dégâts d’une fuite.'],['Un site annonce une fuite de votre compte. Que faire ?','Attendre de voir','Changer seulement le mot de passe du site','Changer immédiatement le mot de passe concerné, vérifier les réutilisations et activer la MFA','Agir vite protège aussi les comptes ayant eu un secret similaire.'],['Un collègue demande votre mot de passe pour finir une tâche.','Le lui envoyer par messagerie','Le dicter si c’est urgent','Refuser et utiliser le partage de droits ou un accès délégué','Un mot de passe est personnel : on partage l’accès, pas le secret.'],['À quoi sert un gestionnaire de mots de passe ?','À publier les mots de passe','À retenir un seul mot de passe faible','À générer et conserver des secrets uniques dans un coffre protégé','Il évite la réutilisation et facilite les mots de passe longs.'],['La MFA protège surtout quand…','Le Wi-Fi est lent','Le mot de passe a fuité','On utilise une adresse e-mail','Un second facteur bloque souvent la connexion même si le secret est connu.'],['Sur un ordinateur partagé, après une pause :','Laisser la session ouverte','Fermer seulement le navigateur','Verrouiller la session avant de s’éloigner','Le verrouillage empêche une utilisation immédiate par un tiers.'],['Où noter un code de récupération ?','Dans un commentaire public','Dans un fichier sur le bureau','Dans le coffre de mots de passe ou un lieu physique sécurisé','Les codes de récupération donnent accès au compte.'],['Pour les comptes professionnel et personnel :','Utiliser le même mot de passe','Changer un caractère selon le site','Utiliser des mots de passe uniques, notamment pour le professionnel','Une fuite d’un service ne doit pas ouvrir les autres.'],['Une alerte MFA inattendue apparaît.','L’accepter pour la faire disparaître','L’ignorer sans suite','La refuser et signaler une possible tentative de connexion','Elle peut indiquer qu’un mot de passe a été compromis.'],['Un mot de passe robuste est…','Le prénom avec 123','Un mot court très compliqué','Long, unique et idéalement généré par un gestionnaire','La longueur et l’unicité sont les protections principales.'],
-...Array.from({length:20},(_,i)=>['Situation de compte n°'+(i+11)+' : quelle règle appliquer ?','Réutiliser un ancien secret','Faire une petite variante du secret','Utiliser un secret long, unique et activer la MFA lorsque proposée','Chaque compte mérite un secret distinct et une protection renforcée.'])]),
-phishing:qs([
-['Un e-mail demande un paiement urgent au nom d’un responsable.','Payer immédiatement','Répondre au même e-mail','Vérifier la demande via un numéro ou canal connu avant toute action','Un autre canal évite de répondre à un imposteur.'],['Un lien affiche “portail-association.exemple” mais mène ailleurs.','Cliquer si le texte semble familier','Le transférer à un collègue','Ne pas cliquer, ouvrir le portail habituel ou signaler','Le texte visible peut masquer une autre destination.'],['Une pièce jointe inattendue arrive d’un contact connu.','L’ouvrir pour vérifier','Répondre en demandant si c’est bien lui','Vérifier par un autre canal avant de l’ouvrir','Le compte d’un contact peut avoir été compromis.'],['Après avoir cliqué sur un lien douteux :','Ne rien dire','Fermer simplement la page','Couper l’action, signaler rapidement et suivre la procédure de sécurité','Un signalement rapide permet de limiter l’impact.'],['Un SMS invite à scanner un QR code pour “débloquer” un compte.','Le scanner','Demander le code à un collègue','Passer par le site ou l’application officielle, sans scanner le code','Un QR code peut cacher une destination malveillante.'],['Un expéditeur ressemble à un service interne mais l’adresse est inhabituelle.','Se fier au nom affiché','Répondre avec les informations demandées','Contrôler l’adresse complète et signaler en cas de doute','Le nom affiché n’est pas une preuve d’identité.'],['Un message impose une action “dans 10 minutes”.','Obéir sous la pression','Attendre sans analyser','Prendre le temps de vérifier la demande et ses indices','L’urgence artificielle est un levier classique.'],['Un appel demande votre code MFA.','Le donner au téléphone','Le donner après avoir rappelé le numéro','Ne jamais le communiquer et signaler la demande','Un code MFA ne doit jamais être partagé.'],['Une facture reçue ne correspond à aucune commande.','La payer pour éviter une relance','Ouvrir la pièce jointe pour confirmer','Vérifier auprès du fournisseur via les coordonnées connues','Ne suivez pas les coordonnées fournies par le message suspect.'],['Un message demande votre mot de passe “pour maintenance”.','Le transmettre','Le changer puis le transmettre','Refuser et contacter le support via le canal officiel','Le support légitime ne demande pas votre mot de passe.'],
-...Array.from({length:20},(_,i)=>['Alerte de messagerie n°'+(i+11)+' : une demande inhabituelle arrive.','Faire confiance au message','Répondre pour demander confirmation','Vérifier par un canal indépendant et signaler si besoin','La vérification indépendante neutralise l’usurpation.'])]),
-social:qs([
-['Une demande de connexion provient d’un profil récent sans contacts communs.','Accepter pour développer le réseau','Envoyer vos informations en message privé','Vérifier l’identité hors plateforme ou ignorer/signaler','Les faux profils collectent souvent des informations.'],['Un concours promet un cadeau contre vos identifiants.','Participer vite','Partager seulement votre e-mail','Ne pas participer et signaler le contenu suspect','Un concours légitime ne demande pas vos identifiants.'],['Avant de cliquer sur une URL raccourcie :','Cliquer pour voir','Demander à un inconnu ce que c’est','Vérifier la destination ou passer par le site officiel','Une URL raccourcie peut cacher le vrai domaine.'],['Une application demande tous vos contacts pour un jeu.','Accepter','Accepter puis supprimer le jeu','Refuser les permissions inutiles et choisir une source fiable','Les permissions doivent être nécessaires au service.'],['Publier son déplacement professionnel en direct :','C’est sans risque','Masquer seulement la ville','Éviter le temps réel et limiter les détails exploitables','Ces informations facilitent l’ingénierie sociale.'],['Une publicité propose un logiciel “gratuit” hors site officiel.','Télécharger','Chercher un autre lien promotionnel','Utiliser uniquement la source officielle ou validée','Les sources non officielles peuvent diffuser des logiciels malveillants.'],['Votre profil est public par défaut.','Ne rien modifier','Cacher seulement votre photo','Revoir les paramètres et limiter la visibilité aux besoins','La confidentialité réduit l’exposition des informations.'],['Un faux compte reprend la photo d’un bénévole.','Lui écrire publiquement vos données','L’ignorer sans rien faire','Signaler l’usurpation et prévenir la personne concernée','Le signalement aide la plateforme à agir.'],['Pour une inscription personnelle :','Utiliser l’adresse professionnelle','Utiliser l’adresse pro si le site est connu','Préférer une adresse personnelle lorsque l’usage n’est pas professionnel','Séparer les usages limite les risques et sollicitations.'],['Une publication affiche des fautes, un gain énorme et un délai court.','Partager','Commenter pour demander une preuve','Ne pas interagir et signaler comme arnaque potentielle','Ces indices combinés sont typiques d’une escroquerie.'],
-...Array.from({length:20},(_,i)=>['Publication n°'+(i+11)+' : que faire face à un lien ou compte inhabituel ?','Partager sans vérifier','Regarder seulement la photo','Vérifier le compte et l’adresse réelle avant toute interaction','L’analyse des indices permet d’éviter les pièges.'])]),
-nomad:qs([
-['Au café, quel réseau utiliser pour un dossier sensible ?','Le premier Wi-Fi ouvert','N’importe quel Wi-Fi avec un mot de passe','Le partage mobile ou la solution d’accès sécurisée prévue','Un réseau ouvert expose davantage les échanges.'],['Vous trouvez une clé USB dans le train.','La brancher pour identifier le propriétaire','La garder sans la brancher','Ne pas la brancher et la remettre au circuit prévu','Une clé inconnue peut contenir un programme malveillant.'],['Dans un train, votre écran est visible.','Continuer avec des données sensibles','Baisser un peu la luminosité','Utiliser un filtre de confidentialité ou reporter la consultation','Les regards indiscrets sont un risque réel.'],['Vous quittez votre table quelques minutes.','Laisser l’ordinateur ouvert','Fermer seulement le document','Verrouiller l’écran et emporter ou attacher le matériel','La protection physique complète le verrouillage.'],['Un réseau “Café-Invités” et “Cafe-Invites” apparaissent.','Choisir le plus fort signal','Tester les deux','Demander le nom exact au personnel avant toute connexion','Un faux point d’accès peut imiter le réseau officiel.'],['Votre téléphone professionnel est perdu.','Attendre de le retrouver','Appeler un proche','Signaler immédiatement selon la procédure de l’organisation','Un signalement rapide permet de protéger ou effacer l’appareil.'],['Un inconnu propose un port USB de recharge.','Brancher le téléphone','Brancher seulement quelques minutes','Préférer son chargeur ou une batterie externe fiable','Un port inconnu peut présenter un risque.'],['Des documents sensibles restent sur la table.','Les laisser face cachée','Les mettre sous un ordinateur','Les ranger dans un sac fermé et les transporter avec vous','La confidentialité passe aussi par les documents papier.'],['Pour accéder aux outils associatifs hors site :','Utiliser tout appareil disponible','Utiliser un appareil personnel sans précaution','Employer l’équipement et l’accès distant autorisés, à jour','Les outils validés offrent les protections attendues.'],['Dans un lieu public, un appel professionnel doit être passé.','Donner tous les détails','Parler moins fort seulement','Éviter les informations sensibles ou s’isoler','Les personnes proches peuvent entendre la conversation.'],
-...Array.from({length:20},(_,i)=>['Situation nomade n°'+(i+11)+' : quelle action est la plus sûre ?','Continuer sans précaution','Faire seulement une vérification rapide','Utiliser les outils autorisés, protéger l’écran et signaler tout incident','En mobilité, sécurité réseau, physique et signalement sont complémentaires.'])])};
-const modules=[['password','01','Comptes & mots de passe','Le serpent des secrets','Dirige avec les flèches ou les boutons. Mange 10 briques : chaque brique déclenche un défi.'],['phishing','02','E-mail & phishing','Route anti-pièges','Déplace le vaisseau sur 3 voies (← →). Attrape les balises ❔ et évite les menaces.'],['social','03','Internet & réseaux sociaux','Casse-briques de vigilance','Déplace la raquette (← →), protège tes 3 vies et casse les briques. Un défi apparaît toutes les 5 briques.'],['nomad','04','Télétravail & nomadisme','Dino nomade','Saute ou baisse-toi selon l’obstacle (↑ / ↓ ou boutons). Un défi apparaît tous les 3 obstacles franchis.']];
-let state={},timer;const $=s=>document.querySelector(s);const shuffle=a=>[...a].sort(()=>Math.random()-.5);
-function home(){clearInterval(timer);$('#game').classList.remove('active');$('#home').classList.add('active');$('#modal').hidden=true}function start(id){clearInterval(timer);state={id,questions:shuffle(BANKS[id]).slice(0,10),n:0,score:0,vigilance:0,errors:[],energy:3,breakerLives:3};$('#home').classList.remove('active');$('#game').classList.add('active');let m=modules.find(x=>x[0]==id);$('#gameTitle').textContent=m[3];$('#gameHint').textContent=m[4];renderIntro(m)}
-function renderIntro(m){$('#stage').innerHTML=`<article class="panel intro"><div class="mascot">🤖</div><h2>Bonjour, je suis Mento !</h2><p>${m[4]}</p><div class="rules"><strong>Règle de la mission</strong><br>Réponds à 10 questions, une seule fois chacune. Les réponses sont mélangées et une explication s’affiche immédiatement. Une partie dure moins de 10 minutes.</div><button class="primary" id="launch">Lancer la mission</button></article>`;$('#launch').onclick=launch}
-function update(){let n=state.n;$('#counter').textContent=`Questions : ${n} / 10`;$('#bar').style.width=(n*10)+'%';$('#extra').textContent=state.id==='phishing'?`Énergie : ${'⚡'.repeat(state.energy)}`:state.id==='social'?`Vigilance : ${state.vigilance} · Vies : ${'●'.repeat(state.breakerLives)}`:state.id==='nomad'?`Sécurité : ${state.vigilance}`:''}
-function launch(){update();({password:snake,phishing:road,social:breaker,nomad:dino})[state.id]()}
-function ask(){clearInterval(timer);let q=state.questions[state.n];$('#modal').hidden=false;$('#modal').innerHTML=`<article class="panel question"><div class="tiny">DÉFI CYBER</div><h2>${q.q}</h2><div class="answers">${shuffle(q.answers).map((a,i)=>`<button class="answer" data-i="${i}">${a.t}</button>`).join('')}</div><div id="feedback"></div></article>`;let answered=false;document.querySelectorAll('.answer').forEach(b=>b.onclick=()=>{if(answered)return;answered=true;let a=shuffle([]);/* button owns text; recover from selected rendered text */let correct=q.answers.find(x=>x.ok).t===b.textContent;if(correct)state.score++;else state.errors.push(q.q);document.querySelectorAll('.answer').forEach(x=>x.disabled=true);$('#feedback').innerHTML=`<div class="feedback ${correct?'good':'bad'}"><strong>${correct?'✓ Bonne réponse !':'✕ À retenir'}</strong><br>${q.e}</div><button class="primary" id="continue">Continuer</button>`;$('#continue').onclick=()=>{state.n++;$('#modal').hidden=true;if(state.n>=10)finish();else launch()}})}
-function snake(){let x=5,y=5,dx=1,dy=0,brick={x:12,y:7};$('#stage').innerHTML=`<div class="arena" id="arena"><span class="snake">🐍</span><span class="brick">🔐</span></div><div class="controls"><button data-d="up">↑</button><button data-d="left">←</button><button data-d="down">↓</button><button data-d="right">→</button></div>`;let draw=()=>{$('.snake').style.cssText=`left:${x*5}%;bottom:${y*7}%;` ;$('.brick').style.cssText=`left:${brick.x*5}%;bottom:${brick.y*7}%;`};let move=d=>{if(d==='up')dx=0,dy=1;if(d==='down')dx=0,dy=-1;if(d==='left')dx=-1,dy=0;if(d==='right')dx=1,dy=0};document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>move(b.dataset.d));document.onkeydown=e=>{if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();move(e.key.slice(5).toLowerCase())}};draw();timer=setInterval(()=>{x+=dx;y+=dy;if(x<0||x>19||y<0||y>12){x=5;y=5}if(x===brick.x&&y===brick.y){ask();return}draw()},260)}
-function road(){let lane=1,spawn=0;$('#stage').innerHTML=`<div class="arena" id="arena"><span class="ship">🚀</span></div><div class="controls"><button id="left">←</button><button id="right">→</button></div><p class="tiny">Mento : les balises ❔ donnent un défi ; chaque menace ⚠️ touchée retire une vie.</p>`;let set=d=>{lane=Math.max(0,Math.min(2,lane+d));$('.ship').style.left=["15%","calc(50% - 17px)","78%"][lane]};$('#left').onclick=()=>set(-1);$('#right').onclick=()=>set(1);document.onkeydown=e=>{if(e.key==='ArrowLeft')set(-1);if(e.key==='ArrowRight')set(1)};timer=setInterval(()=>{let el=document.createElement('span'),q=spawn++%3===0;el.className='fall';el.textContent=q?'❔':'⚠️';el.style.left=["15%","48%","80%"][Math.floor(Math.random()*3)];$('#arena').append(el);setTimeout(()=>{if(!el.isConnected)return;let r=el.getBoundingClientRect(),ship=$('.ship').getBoundingClientRect(),hit=r.left<ship.right&&r.right>ship.left&&r.top<ship.bottom&&r.bottom>ship.top;if(hit){if(q)ask();else{state.energy=Math.max(0,state.energy-1);update()}}el.remove()},2650)},950)}
-function gameOver(){clearInterval(timer);$('#stage').innerHTML=`<article class="panel result"><div class="mascot">🤖</div><h2>Game over</h2><p>Mento : les trois vies du casse-briques sont épuisées. Recommence la mission pour retenter le parcours.</p><div class="actions"><button class="primary" id="again">Rejouer</button><button class="back" id="finishHome">Retour à l’accueil</button></div></article>`;$('#again').onclick=()=>start(state.id);$('#finishHome').onclick=home}
-function breaker(){let game=state.breaker||(state.breaker={paddle:42,ball:{x:50,y:75,dx:1.15,dy:-1.05},destroyed:0,bricks:Array.from({length:50},(_,i)=>({x:8+(i%5)*18,y:8+Math.floor(i/5)*7,live:true}))}),{paddle,ball,bricks}=game;$('#stage').innerHTML=`<div class="breaker" id="breaker"><div class="brickwall">${bricks.map((b,i)=>`<i class="gamebrick${b.live?'':' hidden'}" data-brick="${i}"></i>`).join('')}</div><span class="ball">🟢</span><i class="paddle"></i></div><div class="controls"><button id="bLeft">←</button><button id="bRight">→</button></div><p class="tiny">Mento : déplace la raquette pour garder la balle en jeu. Une question apparaît toutes les 5 briques cassées. Tu as 3 vies.</p>`;let draw=()=>{$('.ball').style.cssText=`left:${ball.x}%;top:${ball.y}%;` ;$('.paddle').style.left=game.paddle+'%'};let move=d=>{game.paddle=Math.max(0,Math.min(78,game.paddle+d));draw()};$('#bLeft').onclick=()=>move(-10);$('#bRight').onclick=()=>move(10);document.onkeydown=e=>{if(e.key==='ArrowLeft'){e.preventDefault();move(-8)}if(e.key==='ArrowRight'){e.preventDefault();move(8)}};draw();timer=setInterval(()=>{ball.x+=ball.dx;ball.y+=ball.dy;if(ball.x<0||ball.x>96)ball.dx*=-1;if(ball.y<0)ball.dy=Math.abs(ball.dy);if(ball.y>88){if(ball.x>game.paddle-2&&ball.x<game.paddle+24){ball.dy=-Math.abs(ball.dy);ball.dx+=(ball.x-(game.paddle+11))*.025}else{state.breakerLives--;update();if(state.breakerLives===0){gameOver();return}Object.assign(ball,{x:50,y:75,dx:1.15,dy:-1.05});draw();return}}let hit=bricks.findIndex(b=>b.live&&Math.abs(ball.x-b.x)<8&&Math.abs(ball.y-b.y)<5);if(hit>=0){bricks[hit].live=false;game.destroyed++;document.querySelector(`[data-brick="${hit}"]`).classList.add('hidden');ball.dy*=-1;if(game.destroyed%5===0){ask();return}}draw()},35)}
-function dino(){let pose='',game=state.dino||(state.dino={cleared:0,spawned:0});$('#stage').innerHTML=`<div class="dino-run" id="dinoRun"><span class="dino">🦖</span></div><div class="controls"><button id="jump">↑ Sauter</button><button id="duck">↓ Se baisser</button></div><p class="tiny">Mento : saute au-dessus des caisses 🧳 et baisse-toi sous les drones 🛸. Une question apparaît toutes les 3 obstacles franchis.</p>`;let act=p=>{pose=p;$('.dino').className='dino '+p;setTimeout(()=>{pose='';if($('.dino'))$('.dino').className='dino'},p==='jump'?650:550)};$('#jump').onclick=()=>act('jump');$('#duck').onclick=()=>act('duck');document.onkeydown=e=>{if(e.key==='ArrowUp'||e.key===' '){e.preventDefault();act('jump')}if(e.key==='ArrowDown'){e.preventDefault();act('duck')}};timer=setInterval(()=>{let air=game.spawned++%2===1,el=document.createElement('span');el.className='hazard'+(air?' air':'');el.textContent=air?'🛸':'🧳';$('#dinoRun').append(el);setTimeout(()=>{let safe=air?pose==='duck':pose==='jump';if(!safe){state.vigilance=Math.max(0,state.vigilance-1);state.errors.push(air?'Drone non évité : se baisser sous un obstacle haut':'Caisse non évitée : sauter un obstacle au sol')}else{state.vigilance++;game.cleared++}update();el.remove();if(safe&&game.cleared%3===0)ask()},1780)},2500)}
-function finish(){clearInterval(timer);let msg=state.score>=9?'Bien joué ! Tu maîtrises les bons réflexes cyber.':state.score>=6?'Presque ! Quelques réflexes restent à consolider.':'Mento te conseille de revoir les bonnes pratiques avant de retenter ta chance.';let extra='';if(state.id==='social')extra=`<p><strong>Vigilance du casse-briques : ${state.vigilance}/10</strong></p><h3>Erreurs à retenir</h3><ul>${(state.errors.slice(0,3).length?state.errors.slice(0,3):['Aucune erreur de vigilance relevée']).map(x=>`<li>${x}</li>`).join('')}</ul><p><strong>Conseils :</strong> vérifie les profils et les URL ; limite les informations visibles ; signale les contenus suspects.</p>`;if(state.id==='nomad')extra=`<p><strong>Sécurité des environnements : ${state.vigilance}/10</strong></p><h3>Les 5 réflexes essentiels</h3><ol><li>Utiliser un accès réseau sécurisé.</li><li>Verrouiller et garder ses équipements avec soi.</li><li>Protéger écran et conversations des regards indiscrets.</li><li>Éviter les supports et ports inconnus.</li><li>Signaler vite perte, vol ou incident.</li></ol>`;$('#stage').innerHTML=`<article class="panel result"><div class="mascot">🤖</div><h2>Mission terminée : ${state.score}/10</h2><p>${msg}</p>${extra}<div class="actions"><button class="primary" id="again">Rejouer</button><button class="back" id="finishHome">Retour à l’accueil</button></div></article>`;$('#again').onclick=()=>start(state.id);$('#finishHome').onclick=home;update()}
-$('#moduleGrid').innerHTML=modules.map(m=>`<button class="module" data-id="${m[0]}"><span class="num">MODULE ${m[1]}</span><h2>${m[2]}</h2><p>${m[3]}</p><span class="arrow">Lancer →</span></button>`).join('');document.querySelectorAll('.module').forEach(b=>b.onclick=()=>start(b.dataset.id));$('#homeBtn').onclick=home;$('#quiet').onclick=()=>$('#quiet').textContent='🔇 Mode silencieux : actif';
-</script></body></html>
+(() => {
+'use strict';
+
+/* =====================================================================
+   BANQUES DE QUESTIONS (30 par module) — facilement modifiables.
+   Format : [ question, réponse FAUSSE, réponse PRESQUE juste, réponse JUSTE, explication ]
+   L'ordre des réponses est mélangé à chaque affichage.
+   ===================================================================== */
+const BANKS = {
+
+/* ---------- MODULE 1 : COMPTES & MOTS DE PASSE ---------- */
+password: [
+["Pour le compte de l'association, quel mot de passe choisir ?",
+ "asso2026, comme tout le monde le fait",
+ "Un mot de passe de 8 caractères avec une majuscule, un chiffre et un symbole",
+ "Une phrase de passe longue, unique, qu'on peut mémoriser",
+ "La longueur et l'unicité comptent plus que la complexité apparente."],
+["Pourquoi ne faut-il pas réutiliser le même mot de passe sur plusieurs sites ?",
+ "Parce que c'est interdit par la loi, c'est largement suffisant",
+ "Parce qu'on risque de s'en souvenir plus difficilement",
+ "Parce qu'une fuite sur un site expose tous les autres comptes",
+ "Les attaquants testent automatiquement les mots de passe volés sur d'autres services."],
+["Un site annonce une fuite de données qui touche votre compte. Que faire ?",
+ "Attendre que le site vous recontacte, comme tout le monde le fait",
+ "Changer uniquement le mot de passe de ce site, ce qui suffit dans la plupart des cas",
+ "Changer le mot de passe, activer la MFA et modifier les autres comptes où il était réutilisé",
+ "Un mot de passe fuité est connu des attaquants : il faut aussi traiter les comptes similaires."],
+["Un collègue vous demande votre mot de passe pour terminer une tâche. Que faites-vous ?",
+ "Vous le lui envoyez par message, comme tout le monde le fait",
+ "Vous le lui dictez au téléphone, puis vous le changez et on s'en tient là",
+ "Vous refusez et lui faites accorder les droits d'accès nécessaires",
+ "Un mot de passe est personnel : on partage l'accès, jamais le secret."],
+["À quoi sert un gestionnaire de mots de passe ?",
+ "À utiliser le même mot de passe partout plus facilement, ça ne pose pas de problème",
+ "À mémoriser les mots de passe à votre place, ce qui suffit dans la plupart des cas",
+ "À générer et conserver des mots de passe uniques et robustes dans un coffre chiffré",
+ "Il permet d'avoir un mot de passe différent par compte sans effort de mémoire."],
+["Quel est l'intérêt de l'authentification multifacteur (MFA) ?",
+ "Elle dispense de choisir un mot de passe robuste, comme tout le monde le fait",
+ "Elle ajoute une étape, mais seulement utile pour les comptes d'administration",
+ "Même si le mot de passe est volé, le compte reste protégé par un second facteur",
+ "La MFA bloque la majorité des prises de contrôle de comptes, quel que soit le compte."],
+["Où conserver ses mots de passe ?",
+ "Sur un post-it collé sous le clavier, comme tout le monde le fait",
+ "Dans un fichier Excel intitulé « mots de passe » sur le bureau et on s'en tient là",
+ "Dans un gestionnaire de mots de passe protégé par un mot de passe maître robuste",
+ "Un fichier en clair est lisible par n'importe quel logiciel malveillant ou voleur d'ordinateur."],
+["Un ordinateur partagé propose d'enregistrer votre mot de passe. Que faites-vous ?",
+ "J'accepte pour gagner du temps, c'est le plus simple",
+ "J'accepte, puis je supprime l'historique en partant",
+ "Je refuse et je me déconnecte à la fin de ma session",
+ "Sur un poste partagé, rien ne doit rester mémorisé après votre départ."],
+["Quand faut-il impérativement changer un mot de passe ?",
+ "Uniquement une fois par an, à date fixe, ça ne pose pas de problème",
+ "Chaque semaine, pour être plus en sécurité, c'est déjà un bon début",
+ "Dès qu'une compromission est suspectée ou qu'une fuite est signalée",
+ "Les changements forcés sans raison poussent à créer des variantes prévisibles."],
+["Quelqu'un se présentant comme le « service informatique » vous demande votre mot de passe par téléphone.",
+ "Je le donne, c'est le service informatique, c'est le plus simple",
+ "Je le donne après avoir vérifié le numéro affiché et on s'en tient là",
+ "Je refuse : aucun service légitime ne demande votre mot de passe",
+ "Un numéro affiché peut être usurpé ; un mot de passe ne se communique jamais."],
+["Qu'est-ce qu'une phrase de passe ?",
+ "Un mot du dictionnaire suivi d'un chiffre, comme tout le monde le fait",
+ "Une citation ou des paroles de chanson connues, ce qui suffit dans la plupart des cas",
+ "Une suite de plusieurs mots peu liés ou une phrase personnelle, longue et facile à retenir",
+ "Les phrases connues se trouvent dans les dictionnaires d'attaque ; une phrase personnelle est plus sûre."],
+["Quelles informations éviter dans un mot de passe ?",
+ "Aucune, tant que le mot de passe est long, comme tout le monde le fait",
+ "Uniquement votre date de naissance, ce qui suffit dans la plupart des cas",
+ "Toute information devinable : prénoms, dates, nom de l'association, club favori…",
+ "Les attaquants testent d'abord ce qu'ils peuvent apprendre sur vous."],
+["Remplacer les « a » par « @ » et les « o » par « 0 » dans un mot courant, c'est :",
+ "Une technique imbattable, comme tout le monde le fait",
+ "Un petit plus pour un mot de passe déjà court et on s'en tient là",
+ "Inefficace : ces substitutions sont connues des outils d'attaque",
+ "Mieux vaut allonger le mot de passe que le déguiser."],
+["Le compte de l'association sur un réseau social est utilisé par plusieurs bénévoles. Que choisir ?",
+ "Un mot de passe simple écrit dans le groupe de discussion, comme tout le monde le fait",
+ "Un mot de passe fort envoyé par e-mail à tous les bénévoles en espérant que ça suffise",
+ "Un coffre partagé ou des accès nominatifs, avec la MFA et retrait des droits au départ",
+ "Les accès partagés doivent rester traçables et révocables."],
+["Un bénévole quitte l'association. Que faut-il faire ?",
+ "Rien, il est de confiance, comme tout le monde le fait",
+ "Lui demander de ne plus se connecter, ce qui suffit dans la plupart des cas",
+ "Supprimer ses accès et changer les mots de passe des comptes partagés qu'il connaissait",
+ "Retirer les accès au départ fait partie de la sécurité de base."],
+["Quelle longueur minimale est recommandée pour un mot de passe standard ?",
+ "6 caractères suffisent s'il y a un symbole, c'est plus rapide",
+ "8 caractères avec 4 types de caractères et on s'en tient là",
+ "12 caractères ou plus, davantage pour les comptes importants",
+ "Chaque caractère supplémentaire augmente fortement le temps nécessaire pour le deviner."],
+["Quel second facteur est le plus robuste ?",
+ "Une question secrète comme le nom de l'animal de compagnie",
+ "Un code reçu par SMS, ce qui suffit dans la plupart des cas",
+ "Une application d'authentification ou une clé de sécurité physique",
+ "Le SMS vaut mieux que rien, mais peut être détourné (échange de carte SIM, interception)."],
+["Vous recevez un code de validation que vous n'avez pas demandé. Que faire ?",
+ "L'ignorer, c'est une erreur du système, comme tout le monde le fait",
+ "Le saisir pour faire cesser les notifications, c'est déjà un bon début",
+ "Ne rien valider, changer le mot de passe tout de suite et le signaler",
+ "Quelqu'un connaît probablement votre mot de passe et tente de se connecter."],
+["Vous vous éloignez de votre poste de travail quelques minutes. Que faire ?",
+ "Rien, tout le monde se connaît, c'est plus rapide",
+ "Verrouiller seulement si je quitte le bâtiment",
+ "Verrouiller la session à chaque fois (Windows + L)",
+ "Un poste déverrouillé donne accès à tous vos comptes en quelques secondes."],
+["Vous vous êtes connecté·e sur l'ordinateur d'un tiers. Comment partir ?",
+ "Fermer simplement l'onglet, comme tout le monde le fait",
+ "Fermer le navigateur, ce qui suffit dans la plupart des cas",
+ "Se déconnecter explicitement, ne rien enregistrer et changer le mot de passe en cas de doute",
+ "Fermer un onglet ne ferme pas forcément la session ouverte."],
+["Un site propose une « question secrète » (ex. : nom de votre premier animal). Comment répondre ?",
+ "Avec la vraie réponse, plus facile à retenir, comme tout le monde le fait",
+ "Avec la vraie réponse en changeant une lettre, c'est mieux que de ne rien faire",
+ "Avec une réponse aléatoire ou une phrase de passe, conservée dans le gestionnaire",
+ "Les réponses vraies sont souvent devinables via les réseaux sociaux."],
+["Comment savoir si l'un de vos comptes a fuité ?",
+ "Impossible à savoir, comme tout le monde le fait",
+ "En attendant de constater un piratage visible en espérant que ça suffise",
+ "Via un service reconnu de vérification de fuites, avec alertes activées",
+ "Détecter une fuite tôt permet de changer les mots de passe avant qu'ils soient exploités."],
+["Que faire du mot de passe par défaut d'une box, d'un routeur ou d'une caméra ?",
+ "Le conserver, il est fourni par le fabricant",
+ "Le changer quand on y pense",
+ "Le changer dès l'installation",
+ "Les mots de passe par défaut sont publics et testés en premier."],
+["Vous recevez une alerte de connexion depuis un pays inconnu à votre compte. Que faire ?",
+ "L'ignorer, c'est sûrement un VPN, comme tout le monde le fait",
+ "Changer le mot de passe dans la semaine, ce qui suffit dans la plupart des cas",
+ "Changer immédiatement le mot de passe, fermer les sessions ouvertes et vérifier la MFA",
+ "Plus on réagit vite, moins l'attaquant a le temps d'agir."],
+["Vous devez transmettre un mot de passe à un collègue. Quelle méthode retenir ?",
+ "Le lui envoyer par e-mail, comme tout le monde le fait",
+ "Le lui envoyer dans un second e-mail séparé, ce qui suffit dans la plupart des cas",
+ "Utiliser le partage sécurisé du gestionnaire ou un autre canal, puis le faire changer à la première connexion",
+ "Le mot de passe est un secret qui ne doit pas rester dans des boîtes de réception."],
+["Peut-on utiliser le même mot de passe pour un compte professionnel et un compte personnel ?",
+ "Oui, c'est plus pratique, comme tout le monde le fait",
+ "Oui, si le mot de passe est robuste et on s'en tient là",
+ "Non : chaque compte doit avoir son propre mot de passe",
+ "La fuite d'un site personnel ne doit jamais ouvrir l'accès aux outils de l'association."],
+["Vous craignez d'oublier le mot de passe maître de votre gestionnaire. Que faire ?",
+ "Le noter dans un e-mail envoyé à soi-même, comme tout le monde le fait",
+ "Choisir un mot de passe très simple, ce qui suffit dans la plupart des cas",
+ "Choisir une phrase de passe mémorisable et prévoir une récupération sécurisée hors ligne",
+ "Le mot de passe maître protège tout le coffre : il doit être solide et récupérable."],
+["Vous saisissez un mot de passe dans un lieu public. Quelle précaution prendre ?",
+ "Aucune, personne ne regarde, comme tout le monde le fait",
+ "Taper très vite, ce qui suffit dans la plupart des cas",
+ "Vérifier que personne ne regarde, ou passer par un gestionnaire et la MFA",
+ "Le « shoulder surfing » consiste à observer l'écran ou le clavier."],
+["Votre navigateur signale qu'un mot de passe enregistré est « compromis ». Que faire ?",
+ "L'ignorer s'il fonctionne encore, tant que ça fonctionne",
+ "Le modifier légèrement (ajouter un chiffre)",
+ "Le remplacer par un nouveau mot de passe unique, généré",
+ "Une variante simple d'un mot de passe volé est vite devinée."],
+["Quelle bonne pratique pour le compte administrateur du site de l'association ?",
+ "L'utiliser pour toutes les tâches quotidiennes, comme tout le monde le fait",
+ "Lui donner un mot de passe plus long que les autres, c'est mieux que de ne rien faire",
+ "Utiliser un compte administrateur dédié avec MFA, réservé aux tâches d'administration",
+ "Limiter l'usage des comptes à privilèges réduit les conséquences d'une compromission."]
+],
+
+/* ---------- MODULE 2 : E-MAIL & PHISHING ---------- */
+phishing: [
+["Un e-mail du « président » demande un virement urgent et confidentiel. Que faire ?",
+ "Payer immédiatement pour ne pas le faire attendre, comme tout le monde le fait",
+ "Répondre au même e-mail pour demander confirmation, c'est mieux que de ne rien faire",
+ "Vérifier la demande via un canal connu (appel au numéro habituel) avant toute action",
+ "Répondre à un e-mail usurpé revient à parler à l'attaquant."],
+["Le nom affiché de l'expéditeur est celui de votre banque. Que vérifier ?",
+ "Rien : le nom suffit à garantir l'expéditeur",
+ "La présence du logo de la banque et on s'en tient là",
+ "L'adresse réelle de l'expéditeur et son domaine",
+ "Le nom affiché et le logo se falsifient très facilement."],
+["Un lien dans un e-mail vous semble étrange. Que faire ?",
+ "Cliquer pour voir où il mène, comme tout le monde le fait",
+ "Cliquer depuis un onglet de navigation privée, ce qui réduit déjà le danger",
+ "Survoler le lien pour lire l'adresse réelle, ou passer par le site officiel",
+ "Un clic suffit parfois à déclencher un téléchargement malveillant."],
+["Vous recevez une pièce jointe inattendue d'un contact connu (facture, .zip, .html). Que faire ?",
+ "L'ouvrir, c'est un contact connu, comme tout le monde le fait",
+ "L'ouvrir si l'antivirus ne détecte rien, ce qui réduit déjà le danger",
+ "Ne pas l'ouvrir et vérifier auprès de l'expéditeur par un autre canal",
+ "La messagerie du contact a pu être piratée."],
+["Un message affirme que votre compte sera supprimé dans 24 h si vous ne réagissez pas. Que faire ?",
+ "Agir vite pour sauver le compte, comme tout le monde le fait",
+ "Cliquer, mais ne rien saisir, ce qui suffit dans la plupart des cas",
+ "Se méfier de l'urgence, aller sur le site officiel par soi-même et signaler le message",
+ "L'urgence est la technique favorite des escrocs pour empêcher de réfléchir."],
+["Que faire d'un e-mail suspect reçu à l'association ?",
+ "Le transférer à tous les collègues pour les prévenir, c'est plus rapide",
+ "Le supprimer sans rien dire, ce qui suffit dans la plupart des cas",
+ "Le signaler via le bouton ou la procédure prévue, puis le supprimer",
+ "Le signalement permet de protéger les autres et de bloquer l'expéditeur."],
+["Vous avez cliqué sur un lien et saisi votre mot de passe sur une fausse page. Que faire ?",
+ "Attendre de voir si quelque chose se passe, comme tout le monde le fait",
+ "Fermer la page et continuer, ce qui suffit dans la plupart des cas",
+ "Changer le mot de passe immédiatement, prévenir le référent sécurité et surveiller le compte",
+ "Plus la réaction est rapide, plus les dégâts sont limités."],
+["Un e-mail très bien présenté et sans aucune faute est forcément légitime ?",
+ "Oui, les escrocs font des fautes, comme tout le monde le fait",
+ "Oui, si le logo est correct, ce qui suffit dans la plupart des cas",
+ "Non : les messages frauduleux peuvent être parfaits, il faut vérifier expéditeur, lien et demande",
+ "L'IA et les kits de phishing produisent aujourd'hui des messages impeccables."],
+["Un QR code reçu par e-mail ou collé sur une affiche promet un cadeau. Que faire ?",
+ "Le scanner tout de suite, comme tout le monde le fait",
+ "Le scanner mais ne rien saisir, ce qui suffit dans la plupart des cas",
+ "Ne pas le scanner, ou vérifier l'adresse affichée et ne jamais y saisir d'identifiants",
+ "Le « quishing » cache un lien malveillant derrière un QR code."],
+["Un SMS demande 1,99 € de frais de livraison via un lien. Que faire ?",
+ "Payer, la somme est faible, comme tout le monde le fait",
+ "Appeler le numéro indiqué dans le SMS, ce qui suffit dans la plupart des cas",
+ "Ne pas cliquer, vérifier sur le site officiel du transporteur et signaler le SMS (33700)",
+ "Le but est souvent de récupérer vos données bancaires, pas 1,99 €."],
+["Un « support technique » vous appelle pour une « infection » sur votre ordinateur. Que faire ?",
+ "Suivre ses instructions, comme tout le monde le fait",
+ "Lui demander son nom et son numéro, puis continuer",
+ "Raccrocher et contacter vous-même votre support habituel",
+ "Ne donnez jamais le contrôle de votre poste à un appelant inconnu."],
+["Quel indice trahit une adresse d'expéditeur frauduleuse ?",
+ "Elle se termine par .fr, comme tout le monde le fait",
+ "Elle contient le nom de l'association, ce qui suffit dans la plupart des cas",
+ "Un domaine proche du vrai mais légèrement modifié (lettre remplacée, tiret ajouté)",
+ "Les attaquants enregistrent des domaines presque identiques à ceux des organisations."],
+["Un message du « fournisseur » annonce un changement de RIB pour votre prochain paiement. Que faire ?",
+ "Modifier le RIB, la demande est détaillée, comme tout le monde le fait",
+ "Répondre au message pour demander un justificatif, sans aller plus loin",
+ "Appeler le fournisseur sur un numéro déjà connu avant toute modification",
+ "C'est une fraude très courante, appelée fraude au changement de RIB."],
+["Un e-mail contient votre nom, votre fonction et mentionne un projet réel. Que penser ?",
+ "Il est donc forcément légitime, comme tout le monde le fait",
+ "Il est crédible, je réponds prudemment, ce qui suffit dans la plupart des cas",
+ "Ces informations ont pu être collectées en ligne : je vérifie quand même la demande",
+ "Le spear phishing utilise des informations réelles pour inspirer confiance."],
+["Une page de connexion s'affiche après un clic dans un e-mail. Que faire ?",
+ "Saisir mes identifiants, la page est identique au site habituel, c'est plus rapide",
+ "Vérifier la présence du cadenas HTTPS puis me connecter, c'est déjà un bon début",
+ "Ne rien saisir et ouvrir le site via mon favori ou en tapant l'adresse moi-même",
+ "Le cadenas prouve que la connexion est chiffrée, pas que le site est honnête."],
+["Un e-mail non sollicité propose un lien « Se désabonner ». Que faire ?",
+ "Cliquer pour se désabonner, c'est largement suffisant",
+ "Répondre « STOP », c'est mieux que de ne rien faire",
+ "Ne pas interagir, et signaler ou bloquer l'expéditeur",
+ "Interagir confirme que votre adresse est active."],
+["Un collègue vous écrit pour vous demander d'acheter des cartes cadeaux en urgence. Que faire ?",
+ "En acheter, c'est pour l'association, comme tout le monde le fait",
+ "En acheter une petite quantité d'abord, ce qui réduit déjà le danger",
+ "Vérifier par un autre canal (appel, en personne) avant toute action",
+ "Les demandes inhabituelles et pressantes sont la signature des fraudes au dirigeant."],
+["On vous demande par e-mail la liste des adhérents avec leurs coordonnées. Que faire ?",
+ "L'envoyer, la demande semble normale, comme tout le monde le fait",
+ "L'envoyer en pièce jointe protégée par mot de passe, ce qui suffit dans la plupart des cas",
+ "Vérifier l'identité et la légitimité du demandeur par un autre canal, et ne partager que le nécessaire",
+ "Les données personnelles ne se transmettent qu'après vérification."],
+["Un e-mail menace de diffuser une vidéo de vous et exige un paiement en bitcoins. Que faire ?",
+ "Payer pour éviter des ennuis, comme tout le monde le fait",
+ "Répondre pour négocier, ce qui suffit dans la plupart des cas",
+ "Ne pas payer, changer vos mots de passe et signaler ou porter plainte",
+ "C'est un chantage de masse : payer encourage de nouvelles demandes."],
+["Un message Teams ou WhatsApp d'un contact inconnu contient un lien. Que faire ?",
+ "Cliquer, c'est un message interne, comme tout le monde le fait",
+ "Répondre pour demander de quoi il s'agit, ce qui limite déjà les risques",
+ "Ne pas cliquer et vérifier l'identité de l'expéditeur par un autre canal",
+ "Le phishing existe aussi sur les messageries instantanées."],
+["Face à un doute sur un message, quel est le meilleur réflexe ?",
+ "L'ignorer et passer à autre chose, comme tout le monde le fait",
+ "Demander à un collègue s'il l'a reçu aussi, ce qui suffit dans la plupart des cas",
+ "Le signaler au référent sécurité ou à l'informatique et attendre sa réponse avant d'agir",
+ "Le signalement permet de protéger toute l'organisation."],
+["Un e-mail se présentant comme l'administration fiscale annonce un remboursement. Que faire ?",
+ "Cliquer pour le recevoir, comme tout le monde le fait",
+ "Vérifier que le logo est correct, c'est mieux que de ne rien faire",
+ "Ne pas cliquer, accéder à son espace personnel via le site officiel",
+ "Les administrations ne demandent pas de coordonnées bancaires par e-mail."],
+["Un document Office vous invite à « Activer les macros » pour afficher son contenu. Que faire ?",
+ "Activer, sinon rien ne s'affichera, c'est plus rapide",
+ "Activer si le document vient d'un contact",
+ "Ne pas activer et vérifier l'envoi avec l'expéditeur",
+ "Les macros sont un vecteur classique de logiciels malveillants."],
+["Qu'est-ce que le phishing (hameçonnage) ?",
+ "Un virus qui s'installe quand on ouvre un e-mail, comme tout le monde le fait",
+ "Un e-mail publicitaire non sollicité, ce qui suffit dans la plupart des cas",
+ "Une tentative de tromper pour obtenir identifiants, argent ou accès en imitant un tiers de confiance",
+ "Le phishing repose sur la tromperie, pas uniquement sur la technique."],
+["Vous recevez un partage de document inattendu via un lien. Que faire ?",
+ "L'ouvrir pour voir de quoi il s'agit, tant que ça fonctionne",
+ "L'ouvrir si l'extension est .docx en espérant que ça suffise",
+ "Vérifier avec l'expéditeur par un autre canal avant d'ouvrir",
+ "Les faux partages de documents servent à voler vos identifiants."],
+["Après l'ouverture d'une pièce jointe suspecte, votre ordinateur se comporte bizarrement. Que faire ?",
+ "Continuer à travailler, comme tout le monde le fait",
+ "Redémarrer l'ordinateur, ce qui suffit dans la plupart des cas",
+ "Débrancher le poste du réseau et prévenir immédiatement le référent informatique",
+ "Isoler le poste empêche la propagation vers les autres machines."],
+["Pourquoi confirmer une demande urgente par un second canal (appel, message vérifié) ?",
+ "Pour retarder le travail, comme tout le monde le fait",
+ "Pour garder une trace écrite, ce qui suffit dans la plupart des cas",
+ "Parce que le canal d'origine peut être contrôlé ou usurpé par l'attaquant",
+ "Un deuxième canal indépendant casse la plupart des fraudes."],
+["Un « bénévole en voyage » écrit depuis un nouveau numéro WhatsApp pour demander un virement. Que faire ?",
+ "Faire le virement, il est en difficulté",
+ "Lui demander une photo, c'est déjà un bon début",
+ "Appeler son numéro habituel avant toute action",
+ "Les photos et messages sont faciles à falsifier : seul un contact connu fait foi."],
+["Un e-mail de la « DSI » demande de valider votre boîte via un lien pour éviter sa saturation. Que faire ?",
+ "Cliquer et valider, comme tout le monde le fait",
+ "Cliquer après avoir vérifié le nom de l'expéditeur et on s'en tient là",
+ "Ne pas cliquer et contacter l'informatique par le canal habituel",
+ "Un vrai service informatique n'impose pas de valider un compte via un lien reçu par e-mail."],
+["Vous écrivez à de nombreux adhérents. Comment protéger leurs adresses e-mail ?",
+ "Les mettre toutes en destinataires visibles, c'est plus rapide",
+ "Les mettre en copie (Cc), ce qui limite déjà les risques",
+ "Utiliser la copie cachée (Cci) ou un outil d'envoi dédié",
+ "Des adresses visibles de tous peuvent être collectées et réutilisées pour du phishing."]
+],
+
+/* ---------- MODULE 3 : INTERNET & RÉSEAUX SOCIAUX ---------- */
+social: [
+["Un profil récent, sans relation commune, vous envoie une demande de connexion. Que faire ?",
+ "Accepter pour développer mon réseau, tant que ça fonctionne",
+ "Accepter si la photo de profil semble sérieuse et on s'en tient là",
+ "Vérifier l'identité hors plateforme, ou ignorer et signaler",
+ "Les faux profils servent à collecter des informations ou à préparer des arnaques."],
+["Un concours promet un smartphone si vous partagez la publication et remplissez un formulaire. Que faire ?",
+ "Participer, on ne risque rien, comme tout le monde le fait",
+ "Partager sans remplir le formulaire, ce qui suffit dans la plupart des cas",
+ "Ne pas participer, vérifier sur la page officielle et signaler la publication",
+ "Les faux concours servent à récupérer vos données personnelles."],
+["Vous partez en vacances. Comment utiliser les réseaux sociaux ?",
+ "Publier en direct avec la localisation, comme tout le monde le fait",
+ "Publier en direct, mais seulement pour mes amis en espérant que ça suffise",
+ "Publier après le retour, avec une audience limitée et sans géolocalisation",
+ "Annoncer une absence prolongée aide les cambrioleurs et les arnaqueurs."],
+["Comment gérer les paramètres de confidentialité de vos comptes ?",
+ "Garder les réglages par défaut, comme tout le monde le fait",
+ "Les vérifier une fois à la création du compte, ce qui suffit dans la plupart des cas",
+ "Les revoir régulièrement et limiter la visibilité aux personnes qui doivent voir vos publications",
+ "Les plateformes modifient régulièrement leurs réglages : un contrôle périodique est nécessaire."],
+["Quelle adresse e-mail utiliser pour créer un compte personnel sur un réseau social ?",
+ "L'adresse professionnelle, c'est pratique, comme tout le monde le fait",
+ "L'adresse professionnelle avec un mot de passe fort et on s'en tient là",
+ "Une adresse personnelle dédiée, distincte de l'adresse professionnelle",
+ "Une adresse pro exposée sur un réseau peut être ciblée par du phishing."],
+["Une application demande l'accès à tous vos contacts, vos messages et votre position. Que faire ?",
+ "Accepter, c'est la règle, comme tout le monde le fait",
+ "Accepter si l'application est bien notée, ce qui réduit déjà le danger",
+ "Accorder uniquement les autorisations nécessaires et refuser le reste",
+ "Une application ne doit accéder qu'aux données utiles à son fonctionnement."],
+["Après une plainte publique, un « service client » vous contacte en message privé avec un lien. Que faire ?",
+ "Cliquer pour régler le problème, comme tout le monde le fait",
+ "Vérifier qu'il y a un logo sur le profil en espérant que ça suffise",
+ "Passer par les canaux officiels indiqués sur le site de l'entreprise",
+ "Les faux services clients guettent les plaintes publiques."],
+["Une publicité vous propose un logiciel gratuit. Que faire ?",
+ "Télécharger directement via la publicité, comme tout le monde le fait",
+ "Télécharger depuis un site connu qui relaie la publicité, ce qui suffit dans la plupart des cas",
+ "Télécharger uniquement depuis le site officiel de l'éditeur ou un magasin d'applications officiel",
+ "Les publicités malveillantes (malvertising) diffusent des logiciels piégés."],
+["Avant de saisir des identifiants sur un site, quelle vérification est la plus fiable ?",
+ "Le logo ressemble à celui du site habituel, c'est plus rapide",
+ "Le cadenas HTTPS est affiché, ce qui limite déjà les risques",
+ "Lire l'adresse complète et vérifier le nom de domaine exact",
+ "Un site frauduleux peut avoir un cadenas ; seul le nom de domaine compte."],
+["Comment gérer les mises à jour du navigateur ?",
+ "Les reporter, ça marche très bien comme ça",
+ "Les installer une fois par an",
+ "Activer les mises à jour automatiques",
+ "Les mises à jour corrigent des failles activement exploitées."],
+["Vous publiez une photo de votre premier jour avec votre badge visible. Que faire ?",
+ "Publier telle quelle, comme tout le monde le fait",
+ "Publier en masquant seulement le nom, ce qui suffit dans la plupart des cas",
+ "Ne pas publier, ou masquer le badge, les écrans et les documents visibles",
+ "Un badge peut être copié et les arrière-plans révèlent des informations."],
+["Qui doit pouvoir administrer la page de l'association sur un réseau social ?",
+ "Tous les bénévoles, comme tout le monde le fait",
+ "Les bénévoles qui publient le plus souvent, ce qui suffit dans la plupart des cas",
+ "Un nombre limité d'administrateurs nominatifs avec MFA, dont les droits sont retirés en cas de départ",
+ "Moins il y a d'administrateurs, moins il y a de risques."],
+["Un ami vous envoie sur la messagerie « Regarde cette vidéo de toi ! » avec un lien. Que faire ?",
+ "Cliquer, c'est un ami, comme tout le monde le fait",
+ "Répondre pour demander ce que c'est, ce qui suffit dans la plupart des cas",
+ "Ne pas cliquer et prévenir l'ami par un autre canal : son compte est peut-être piraté",
+ "Les comptes piratés servent à diffuser des liens vers les contacts."],
+["Un quiz « Quel est le nom de votre premier animal ? » circule sur les réseaux. Que faire ?",
+ "Participer, c'est amusant, comme tout le monde le fait",
+ "Participer sans donner le nom complet, ce qui suffit dans la plupart des cas",
+ "Éviter : ces informations répondent souvent aux questions de sécurité de vos comptes",
+ "Les jeux de ce type servent parfois à collecter des réponses secrètes."],
+["Une vidéo d'une personnalité connue réclame des dons pour une cause. Que faire ?",
+ "Donner, la vidéo est convaincante, comme tout le monde le fait",
+ "Partager pour aider, ce qui suffit dans la plupart des cas",
+ "Vérifier la source officielle de l'organisation avant tout don ou partage",
+ "Les contenus truqués (deepfakes) servent à tromper de façon crédible."],
+["Un faux compte reprend le nom et le logo de l'association. Que faire ?",
+ "Ignorer, comme tout le monde le fait",
+ "Commenter pour avertir les abonnés, ce qui suffit dans la plupart des cas",
+ "Signaler le compte à la plateforme et prévenir via les canaux officiels de l'association",
+ "Le signalement mène à la suppression, la communication protège le public."],
+["Un lien raccourci vous est envoyé en commentaire. Que faire ?",
+ "Cliquer, comme tout le monde le fait",
+ "Cliquer s'il vient d'un abonné connu, ce qui suffit dans la plupart des cas",
+ "Prévisualiser l'adresse finale avec un outil de développement de lien, ou ne pas cliquer",
+ "Un lien raccourci cache sa destination."],
+["Une bannière de cookies s'affiche. Quelle est la bonne approche ?",
+ "Tout accepter systématiquement, comme tout le monde le fait",
+ "Fermer la bannière sans la lire, ce qui limite déjà les risques",
+ "Choisir uniquement les cookies nécessaires et refuser le reste",
+ "Les cookies publicitaires servent à suivre votre navigation."],
+["Quelle précaution prendre avant d'installer une extension de navigateur ?",
+ "Installer tout ce qui paraît utile, comme tout le monde le fait",
+ "Installer si l'extension a 4 étoiles, ce qui suffit dans la plupart des cas",
+ "Limiter le nombre d'extensions, les prendre dans le magasin officiel et vérifier leurs permissions",
+ "Une extension peut lire tout ce que vous faites dans le navigateur."],
+["Que fait la navigation privée ?",
+ "Elle vous rend anonyme et vous protège des virus, comme tout le monde le fait",
+ "Elle empêche aussi le site de vous suivre, ce qui suffit dans la plupart des cas",
+ "Elle n'enregistre pas l'historique localement, mais ne masque pas votre adresse IP et ne protège pas des logiciels malveillants",
+ "Ce mode est utile sur un poste partagé, mais ne protège pas contre les menaces."],
+["Vous trouvez en ligne un logiciel payant « cracké » gratuit. Que faire ?",
+ "Le télécharger, comme tout le monde le fait",
+ "Le télécharger puis lancer l'antivirus, ce qui suffit dans la plupart des cas",
+ "Ne pas le télécharger et utiliser une alternative légale ou gratuite officielle",
+ "Les versions piratées sont une source majeure de logiciels malveillants."],
+["L'association souhaite publier la liste de ses bénévoles avec leur téléphone. Que faire ?",
+ "Publier, c'est utile, comme tout le monde le fait",
+ "Publier si les bénévoles l'ont accepté oralement, c'est mieux que de ne rien faire",
+ "Ne publier que ce qui est nécessaire, avec un consentement clair et conforme au RGPD",
+ "Les données personnelles exigent finalité, minimisation et consentement."],
+["Vous exprimez une opinion polémique depuis le compte de l'association. Que faire ?",
+ "Poster, c'est mon opinion, comme tout le monde le fait",
+ "Poster sur mon compte personnel sans mentionner l'association, ce qui limite déjà les risques",
+ "Respecter la charte de communication : ce qui est publié est durable et engage l'association",
+ "Une publication reste souvent accessible, même supprimée."],
+["Un site propose « Se connecter avec un compte de réseau social ». Quelle approche ?",
+ "L'utiliser partout, comme tout le monde le fait",
+ "L'utiliser sur les sites que je connais bien, c'est mieux que de ne rien faire",
+ "L'utiliser avec parcimonie et revoir régulièrement les autorisations accordées",
+ "Chaque autorisation ouvre une porte vers votre compte principal."],
+["Un « recruteur » vous écrit en message privé avec une offre exceptionnelle, un salaire élevé et aucune expérience demandée. Que faire ?",
+ "Répondre rapidement avant que l'offre disparaisse, comme tout le monde le fait",
+ "Envoyer un CV sans données sensibles, ce qui suffit dans la plupart des cas",
+ "Vérifier l'entreprise et la personne sur des sources indépendantes, ne rien envoyer en cas de doute",
+ "Les fausses offres d'emploi servent à collecter des documents d'identité."],
+["Un site de vente propose un prix très inférieur au marché. Que vérifier ?",
+ "Rien, c'est une bonne affaire, comme tout le monde le fait",
+ "Les avis affichés sur le site, ce qui suffit dans la plupart des cas",
+ "Les mentions légales, les avis hors du site et un moyen de paiement sécurisé",
+ "Les faux sites copient les avis ; il faut croiser avec d'autres sources."],
+["Une fenêtre affirme que votre ordinateur est infecté et donne un numéro à appeler. Que faire ?",
+ "Appeler le numéro, comme tout le monde le fait",
+ "Cliquer sur « Fermer » dans la fenêtre, ce qui suffit dans la plupart des cas",
+ "Fermer l'onglet ou le navigateur sans interagir et lancer une analyse antivirus",
+ "Ces fenêtres sont des arnaques au faux support technique."],
+["Quelle protection renforce le plus la sécurité d'un compte de réseau social ?",
+ "Une photo de profil discrète",
+ "Un mot de passe long et on s'en tient là",
+ "Un mot de passe unique associé à la MFA",
+ "Le mot de passe seul ne suffit pas face au vol d'identifiants."],
+["Une information choquante se répand sur les réseaux. Que faire avant de la partager ?",
+ "La partager vite pour informer, comme tout le monde le fait",
+ "La partager en ajoutant « à vérifier », sans aller plus loin",
+ "Vérifier la source, la date et le contexte avant de partager",
+ "Partager sans vérifier amplifie la désinformation."],
+["Un site vous demande, pour créer un compte, des informations qui ne semblent pas nécessaires (adresse, pièce d'identité). Que faire ?",
+ "Tout remplir pour accéder au service, comme tout le monde le fait",
+ "Remplir avec des informations approximatives, sans aller plus loin",
+ "Ne fournir que les informations nécessaires, ou renoncer au service",
+ "Moins vous partagez de données, moins elles peuvent être volées ou détournées."]
+],
+
+/* ---------- MODULE 4 : TÉLÉTRAVAIL & NOMADISME ---------- */
+nomad: [
+["Au café, vous devez consulter un dossier sensible. Quelle connexion utiliser ?",
+ "Le Wi-Fi public ouvert, comme tout le monde le fait",
+ "Un Wi-Fi public qui demande un mot de passe, ce qui suffit dans la plupart des cas",
+ "Le partage de connexion de mon téléphone ou la solution d'accès sécurisée de l'association",
+ "Vous ne contrôlez pas un réseau public ; un réseau personnel ou chiffré est plus sûr."],
+["Deux réseaux au nom similaire apparaissent dans le café. Que faire ?",
+ "Choisir celui qui a le meilleur signal",
+ "Choisir le premier de la liste",
+ "Demander au personnel le nom exact du réseau",
+ "Un faux point d'accès peut imiter le nom du réseau officiel."],
+["À quoi sert un VPN en déplacement ?",
+ "À rien, c'est réservé aux informaticiens, comme tout le monde le fait",
+ "À regarder des contenus d'autres pays, ce qui suffit dans la plupart des cas",
+ "À chiffrer la connexion entre mon appareil et le réseau de l'organisation sur un réseau non maîtrisé",
+ "Le VPN protège le trafic sur les réseaux non sûrs."],
+["Dans le train, votre écran est visible par vos voisins. Que faire ?",
+ "Travailler normalement, comme tout le monde le fait",
+ "Baisser la luminosité, ce qui suffit dans la plupart des cas",
+ "Utiliser un filtre de confidentialité et éviter les documents sensibles",
+ "Les regards indiscrets sont l'une des fuites les plus simples."],
+["Vous devez téléphoner à propos d'un dossier confidentiel dans un lieu public. Que faire ?",
+ "Passer l'appel sur place, tant que ça fonctionne",
+ "Parler à voix basse en espérant que ça suffise",
+ "Reporter l'appel ou s'isoler dans un lieu fermé",
+ "On ne peut pas contrôler qui écoute dans un lieu public."],
+["Au café, vous devez vous absenter 2 minutes. Que faites-vous de votre ordinateur ?",
+ "Le laisser, personne ne le prendra",
+ "Le verrouiller et demander à un voisin de surveiller",
+ "L'emporter avec moi",
+ "Le vol d'un poste est rapide et il contient souvent des données sensibles."],
+["Vous trouvez une clé USB dans le hall de l'espace de coworking. Que faire ?",
+ "La brancher pour retrouver son propriétaire, c'est plus rapide",
+ "La brancher sur un poste non relié au réseau et on s'en tient là",
+ "Ne pas la brancher et la remettre au référent informatique",
+ "Les clés USB piégées sont un vecteur d'attaque connu."],
+["Votre téléphone est presque à plat. Que faire à la borne USB de la gare ?",
+ "Brancher le câble, c'est pratique, comme tout le monde le fait",
+ "Brancher le câble, juste pour la charge, ce qui limite déjà les risques",
+ "Utiliser mon propre chargeur sur prise secteur ou une batterie externe",
+ "Une borne USB piégée peut tenter d'accéder à vos données."],
+["Votre ordinateur portable ou téléphone professionnel est perdu ou volé. Que faire ?",
+ "Attendre un peu : il sera peut-être retrouvé, comme tout le monde le fait",
+ "Prévenir mon responsable en fin de journée, ce qui suffit dans la plupart des cas",
+ "Prévenir immédiatement le référent informatique pour verrouiller ou effacer à distance",
+ "Plus l'alerte est rapide, plus les données sont protégées."],
+["Peut-on accéder aux données de l'association depuis son appareil personnel ?",
+ "Oui, sans restriction, comme tout le monde le fait",
+ "Oui, s'il a un antivirus, ce qui suffit dans la plupart des cas",
+ "Seulement dans le cadre des règles de l'organisation, en privilégiant l'équipement fourni",
+ "Un appareil personnel n'a pas forcément le même niveau de protection."],
+["Une mise à jour système est proposée pendant que vous travaillez. Que faire ?",
+ "La reporter plusieurs semaines, comme tout le monde le fait",
+ "La faire une fois par mois, ce qui suffit dans la plupart des cas",
+ "L'installer dès que possible, ou activer les mises à jour automatiques",
+ "Les mises à jour corrigent des vulnérabilités connues."],
+["Vous avez imprimé des documents confidentiels pendant un déplacement. Que faire ?",
+ "Les laisser dans la chambre d'hôtel, tant que ça fonctionne",
+ "Les jeter à la poubelle, ce qui suffit dans la plupart des cas",
+ "Les garder sur moi et les détruire dans un broyeur au retour",
+ "Un document papier jeté peut être récupéré."],
+["À la maison, quelle précaution prendre pour votre box Internet ?",
+ "Conserver la configuration d'origine, comme tout le monde le fait",
+ "Changer le nom du réseau uniquement, ce qui suffit dans la plupart des cas",
+ "Changer le mot de passe de la box et du Wi-Fi, activer WPA2/WPA3 et mettre à jour",
+ "Un réseau domestique mal sécurisé expose vos équipements."],
+["Un membre de votre famille souhaite utiliser votre ordinateur professionnel. Que faire ?",
+ "Accepter, c'est pour une courte période, comme tout le monde le fait",
+ "Accepter via un compte invité, ce qui suffit dans la plupart des cas",
+ "Refuser : l'équipement professionnel est réservé à un usage professionnel",
+ "Un autre utilisateur peut installer des applications ou voir des données."],
+["Où enregistrer les documents de l'association en télétravail ?",
+ "Sur une clé USB personnelle, c'est largement suffisant",
+ "Sur le disque dur de mon ordinateur personnel",
+ "Dans les espaces de stockage validés par l'association",
+ "Les outils validés sont sauvegardés et contrôlés."],
+["Vous organisez une visioconférence sensible. Comment la sécuriser ?",
+ "Publier le lien sur les réseaux sociaux, comme tout le monde le fait",
+ "Envoyer le lien et le mot de passe dans le même e-mail, sans aller plus loin",
+ "Utiliser une salle d'attente, un lien non public et vérifier les participants",
+ "Un lien public peut être exploité par des intrus."],
+["Vous quittez votre poste de télétravail quelques minutes. Que faire ?",
+ "Rien, je suis chez moi",
+ "Baisser l'écran sans verrouiller",
+ "Verrouiller la session",
+ "Chez soi aussi, on peut avoir des visites ou du passage."],
+["Vous partagez la connexion de votre téléphone. Comment la protéger ?",
+ "La laisser ouverte pour simplifier, comme tout le monde le fait",
+ "Choisir un mot de passe simple, ce qui limite déjà les risques",
+ "Utiliser un mot de passe robuste et un chiffrement WPA2 ou WPA3",
+ "Un point d'accès mal protégé peut être utilisé par un inconnu."],
+["Faut-il laisser le Bluetooth activé en permanence ?",
+ "Oui, c'est plus pratique, comme tout le monde le fait",
+ "Oui, si l'appareil est verrouillé, ce qui suffit dans la plupart des cas",
+ "Non : le désactiver quand il est inutile et refuser les appairages inconnus",
+ "Une interface inutile est une porte d'entrée potentielle."],
+["Vous voyagez à l'étranger avec du matériel de l'association. Quelle précaution ?",
+ "Emporter tout le matériel et toutes les données, comme tout le monde le fait",
+ "Emporter le matériel et ne pas se connecter à des réseaux publics, ce qui suffit dans la plupart des cas",
+ "Se renseigner auprès du référent sécurité, emporter le strict nécessaire et éviter les données sensibles",
+ "Moins on emporte de données, moins on en expose en cas de contrôle ou de vol."],
+["Le portail Wi-Fi d'un hôtel demande d'installer un logiciel pour se connecter. Que faire ?",
+ "L'installer, comme tout le monde le fait",
+ "L'installer s'il affiche le logo de l'hôtel et on s'en tient là",
+ "Refuser et utiliser le partage de connexion de mon téléphone",
+ "Un réseau légitime n'exige pas d'installer un logiciel."],
+["Votre navigateur affiche une alerte de certificat invalide. Que faire ?",
+ "Continuer quand même, c'est le plus simple",
+ "Continuer sans saisir d'informations sensibles",
+ "Arrêter la navigation et ne pas poursuivre",
+ "Un certificat invalide peut indiquer une interception de la connexion."],
+["Pourquoi chiffrer le disque de l'ordinateur portable ?",
+ "Pour accélérer l'ordinateur, comme tout le monde le fait",
+ "Pour éviter les virus, ce qui suffit dans la plupart des cas",
+ "Pour protéger les données si l'ordinateur est perdu ou volé",
+ "Sans chiffrement, un disque peut être lu depuis un autre ordinateur."],
+["Vous devez imprimer un document sensible lors d'un déplacement. Que faire ?",
+ "L'imprimer dans un cybercafé, comme tout le monde le fait",
+ "L'imprimer et récupérer tout de suite le document et on s'en tient là",
+ "Éviter l'impression et utiliser une version numérique protégée",
+ "Une imprimante publique peut conserver des copies des documents."],
+["Vous utilisez un poste partagé dans un espace de coworking. Que faire en partant ?",
+ "Fermer la fenêtre, comme tout le monde le fait",
+ "Fermer le navigateur, ce qui suffit dans la plupart des cas",
+ "Me déconnecter de tous les comptes et ne rien enregistrer",
+ "Une session ouverte donne accès à vos comptes."],
+["Un assistant vocal connecté est actif chez vous pendant une réunion confidentielle. Que faire ?",
+ "Ne rien changer, c'est largement suffisant",
+ "Parler plus bas en espérant que ça suffise",
+ "Le couper ou l'éloigner pendant la réunion",
+ "Ces appareils peuvent enregistrer ou transmettre des conversations."],
+["Pouvez-vous laisser votre ordinateur portable dans le coffre de votre voiture ?",
+ "Oui, il est caché, comme tout le monde le fait",
+ "Oui, pour une courte durée, ce qui suffit dans la plupart des cas",
+ "Non : ne jamais laisser le matériel sans surveillance dans un véhicule",
+ "Les vols de matériel dans les véhicules sont fréquents."],
+["Vous envisagez d'utiliser un service gratuit de transfert de fichiers non validé. Que faire ?",
+ "L'utiliser, c'est pratique, comme tout le monde le fait",
+ "L'utiliser avec un lien protégé par mot de passe, c'est déjà un bon début",
+ "Utiliser les outils validés par l'association ou demander l'autorisation",
+ "Un outil non validé peut stocker les données hors de votre contrôle."],
+["Le VPN ne fonctionne pas pendant un déplacement. Que faire ?",
+ "Le désactiver pour continuer à travailler, ça ne pose pas de problème",
+ "Continuer sur le Wi-Fi public en évitant les sites sensibles",
+ "Utiliser le partage de connexion et contacter le support informatique",
+ "Contourner un dispositif de sécurité expose l'association."],
+["Vous pensez avoir été victime d'un incident (clé branchée par erreur, comportement étrange). Que faire ?",
+ "Attendre le retour au bureau",
+ "Prévenir à la fin de la semaine",
+ "Signaler l'incident sans délai",
+ "Une alerte rapide limite l'impact d'un incident."]
+]
+};
+
+/* =====================================================================
+   OUTILS GÉNÉRAUX
+   ===================================================================== */
+const $ = s => document.querySelector(s);
+const W = 720, H = 480;
+const cv = $('#cv'), ctx = cv.getContext('2d');
+const rand = (a, b) => a + Math.random() * (b - a);
+const randInt = n => Math.floor(Math.random() * n);
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const shuffle = arr => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = randInt(i + 1); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const hearts = n => '♥'.repeat(Math.max(0, n)) + '♡'.repeat(Math.max(0, 3 - n));
+function rr(x, y, w, h, r) { ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); }
+function emo(ch, x, y, size) { ctx.font = size + 'px "Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(ch, x, y); }
+
+const MODULES = [
+  { id: 'password', num: '01', icon: '🔐', title: 'Comptes & mots de passe', game: 'Le serpent des secrets', desc: 'Dirige le serpent : chaque brique mangée déclenche un défi, et il grandit à chaque fois.' },
+  { id: 'phishing', num: '02', icon: '📧', title: 'E-mail & phishing', game: 'Route anti-pièges', desc: 'Pilote ton vaisseau sur 3 voies, évite les hameçons et récupère les questions.' },
+  { id: 'social', num: '03', icon: '🌐', title: 'Internet & réseaux sociaux', game: 'Casse-briques du net', desc: 'Détruis les briques : les briques dorées « ? » déclenchent un défi.' },
+  { id: 'nomad', num: '04', icon: '💼', title: 'Télétravail & nomadisme', game: 'Dino nomade', desc: 'Saute les valises, baisse-toi sous les avions et franchis les points de contrôle.' }
+];
+
+/* Session : mémorise les questions déjà posées pour ne jamais les répéter */
+const session = { used: {}, best: {} };
+MODULES.forEach(m => { session.used[m.id] = new Set(); session.best[m.id] = null; });
+
+let G = null;      // partie en cours
+let raf = 0;       // requestAnimationFrame
+let soundOn = false, actx = null;
+
+/* ---------- Son (désactivé par défaut) ---------- */
+function beep(freq, dur, type) {
+  if (!soundOn) return;
+  try {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    const o = actx.createOscillator(), g = actx.createGain();
+    o.type = type || 'sine'; o.frequency.value = freq; g.gain.value = .05;
+    o.connect(g); g.connect(actx.destination); o.start(); o.stop(actx.currentTime + dur);
+  } catch (e) { /* le son est facultatif */ }
+}
+$('#muteBtn').onclick = () => {
+  soundOn = !soundOn;
+  $('#muteBtn').textContent = soundOn ? '🔊 Son : activé' : '🔇 Son : désactivé';
+  $('#muteBtn').setAttribute('aria-pressed', soundOn);
+  beep(660, .1);
+};
+
+/* =====================================================================
+   TIRAGE DES QUESTIONS (10 sur 30, sans répétition pendant la session)
+   ===================================================================== */
+function pickQuestions(id) {
+  const total = BANKS[id].length;
+  const all = [...Array(total).keys()];
+  let picked = shuffle(all.filter(i => !session.used[id].has(i))).slice(0, 10);
+  if (picked.length < 10) {                 // réserve épuisée : on repart d'une réserve neuve
+    session.used[id] = new Set();
+    const rest = shuffle(all.filter(i => !picked.includes(i)));
+    picked = picked.concat(rest.slice(0, 10 - picked.length));
+  }
+  return picked;
+}
+function makeQuestion(id, idx) {
+  const [q, w, a, r, e] = BANKS[id][idx];
+  return { idx, q, e, answers: shuffle([{ t: w, k: 0 }, { t: a, k: 1 }, { t: r, k: 2 }]) };
+}
+
+/* =====================================================================
+   NAVIGATION
+   ===================================================================== */
+function showView(name) {
+  document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === name));
+  window.scrollTo(0, 0);
+}
+function buildHome() {
+  $('#moduleGrid').innerHTML = MODULES.map(m => {
+    const b = session.best[m.id];
+    return `<button class="module" data-id="${m.id}"><span class="num">MODULE ${m.num}</span>${b !== null ? `<span class="best">Meilleur score : ${b}/10</span>` : ''}
+      <h2>${m.icon} ${m.title}</h2><div class="game">🎮 ${m.game}</div><p>${m.desc}</p><span class="arrow">Jouer →</span></button>`;
+  }).join('');
+  document.querySelectorAll('.module').forEach(b => b.onclick = () => openGame(b.dataset.id));
+}
+function goHome() { stopLoop(); G = null; $('#modal').hidden = true; buildHome(); showView('home'); }
+$('#homeBtn').onclick = goHome;
+
+function stopLoop() { cancelAnimationFrame(raf); raf = 0; if (G) G.running = false; }
+
+/* =====================================================================
+   BOUCLE DE JEU
+   ===================================================================== */
+let last = 0;
+function loop(t) {
+  if (!G || !G.running) return;
+  const dt = Math.min(.05, (t - last) / 1000); last = t;
+  if (!G.paused) ENG[G.id].update(dt);
+  if (G && G.running) { ENG[G.id].draw(); raf = requestAnimationFrame(loop); }
+}
+function updateHud() {
+  $('#counter').textContent = `Questions : ${G.n} / 10`;
+  $('#bar').style.width = (G.n * 10) + '%';
+  $('#extra').textContent = ENG[G.id].hud ? ENG[G.id].hud() : '';
+}
+
+function openGame(id) {
+  stopLoop();
+  const m = MODULES.find(x => x.id === id), eng = ENG[id];
+  G = { id, qs: pickQuestions(id), n: 0, score: 0, log: [], running: false, paused: false };
+  $('#gameTitle').textContent = `${m.icon} ${m.game}`;
+  $('#gameHint').textContent = m.title;
+  buildPad(id);
+  eng.init();
+  updateHud();
+  showView('game');
+  eng.draw();
+  $('#overlay').hidden = false;
+  $('#overlay').innerHTML = `<div class="card"><div style="font-size:42px" aria-hidden="true">🛡️</div>
+    <h2>${m.game}</h2><p><b>Mento :</b> ${eng.intro}</p>
+    <div class="rules"><ul>${eng.rules.map(r => `<li>${r}</li>`).join('')}</ul></div>
+    <button class="primary" id="goBtn">C'est parti !</button> <button class="secondary" id="backBtn">Accueil</button></div>`;
+  $('#goBtn').onclick = beginGame; $('#backBtn').onclick = goHome;
+  $('#goBtn').focus();
+}
+function beginGame() {
+  $('#overlay').hidden = true;
+  G.running = true; last = performance.now();
+  raf = requestAnimationFrame(loop);
+}
+
+/* =====================================================================
+   QUESTION (fenêtre modale) — le jeu est en pause tant qu'elle est ouverte
+   ===================================================================== */
+function ask() {
+  if (!G || G.paused || G.n >= 10) return;
+  G.paused = true;
+  const qi = G.qs[G.n];
+  session.used[G.id].add(qi);
+  const q = makeQuestion(G.id, qi);
+  const modal = $('#modal');
+  modal.innerHTML = `<div class="question"><div class="tiny">🛡️ DÉFI CYBER — Mento te pose une question</div>
+    <h2 id="qtext">${q.q}</h2><div class="answers">${q.answers.map((a, i) => `<button class="answer" data-i="${i}"><b>${i + 1}.</b> ${a.t}</button>`).join('')}</div>
+    <div id="fb"></div></div>`;
+  modal.hidden = false;
+  const btns = [...modal.querySelectorAll('.answer')];
+  let done = false;
+  const choose = i => {
+    if (done) return; done = true;
+    const k = q.answers[i].k;
+    btns.forEach((b, j) => { b.disabled = true; if (q.answers[j].k === 2) b.classList.add('good'); });
+    if (k === 1) btns[i].classList.add('near'); if (k === 0) btns[i].classList.add('bad');
+    const ok = k === 2;
+    if (ok) G.score++;
+    if (ENG[G.id].onAnswer) { ENG[G.id].onAnswer(ok); }
+    G.log.push({ q: q.q, ok, right: q.answers.find(a => a.k === 2).t, e: q.e });
+    beep(ok ? 880 : 220, .18, ok ? 'sine' : 'square');
+    const head = ok ? '✅ Exact !' : (k === 1 ? '🟠 Presque, mais c\'est incomplet.' : '❌ Pas tout à fait.');
+    $('#fb').innerHTML = `<div class="feedback ${ok ? 'ok' : (k === 1 ? 'mid' : 'ko')}"><b>${head}</b><br>${q.e}</div>
+      <p style="text-align:right;margin:12px 0 0"><button class="primary" id="nextBtn">${G.n + 1 >= 10 ? 'Voir mon résultat' : 'Continuer'}</button></p>`;
+    $('#nextBtn').onclick = () => { modal.hidden = true; G.n++; updateHud(); if (G.n >= 10) finish(false); else { G.paused = false; if (ENG[G.id].resume) ENG[G.id].resume(); last = performance.now(); } };
+    $('#nextBtn').focus();
+  };
+  btns.forEach((b, i) => b.onclick = () => choose(i));
+  modal._choose = choose;
+  btns[0].focus();
+}
+
+/* =====================================================================
+   FIN DE PARTIE
+   ===================================================================== */
+function gameOver(reason) { finish(true, reason); }
+function finish(over, reason) {
+  stopLoop();
+  const sc = G.score, n = G.n;
+  if (!over && (session.best[G.id] === null || sc > session.best[G.id])) session.best[G.id] = sc;
+  let title, msg;
+  if (over) { title = '💥 Game over'; msg = `${reason} Tu as répondu à ${n} question${n > 1 ? 's' : ''} sur 10. Rejoue pour terminer le défi : de nouvelles questions t'attendent !`; }
+  else if (sc > 8) { title = '🏆 Bien joué !'; msg = 'Tu maîtrises les bons réflexes cyber. Merci d\'être un maillon fort de la sécurité !'; }
+  else { title = '👍 Défi terminé'; msg = 'Encore un petit effort : relis les explications ci-dessous et retente ta chance pour passer la barre des 8/10.'; }
+  const wrong = G.log.filter(l => !l.ok);
+  const review = wrong.length ? `<div class="review"><b>À retenir :</b>${wrong.map(l => `<div><b>${l.q}</b><br>✔ ${l.right}<br>${l.e}</div>`).join('')}</div>` : '';
+  $('#overlay').hidden = false;
+  $('#overlay').innerHTML = `<div class="card"><h2>${title}</h2><div class="score">${sc} / ${over ? n : 10}</div><p>${msg}</p>${review}
+    <p><button class="primary" id="againBtn">Rejouer</button> <button class="secondary" id="homeBtn2">Retour à l'accueil</button></p></div>`;
+  $('#againBtn').onclick = () => openGame(G.id);
+  $('#homeBtn2').onclick = goHome;
+  $('#againBtn').focus();
+}
+
+/* =====================================================================
+   COMMANDES : clavier, boutons tactiles, pointeur
+   ===================================================================== */
+const KEYMAP = { ArrowLeft: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'right', ArrowUp: 'up', KeyW: 'up', Space: 'up', ArrowDown: 'down', KeyS: 'down' };
+function act(a, down) { if (G && G.running && (down ? !G.paused : true)) ENG[G.id].input(a, down); }
+addEventListener('keydown', e => {
+  const modal = $('#modal');
+  if (!modal.hidden) { const i = '123'.indexOf(e.key); if (i >= 0 && modal._choose) modal._choose(i); return; }
+  if (!G || !G.running) return;
+  const a = KEYMAP[e.code]; if (!a) return;
+  e.preventDefault(); if (!e.repeat || a === 'down') act(a, true);
+});
+addEventListener('keyup', e => { const a = KEYMAP[e.code]; if (a && G && G.running) act(a, false); });
+
+function buildPad(id) {
+  const pad = $('#pad');
+  const B = (a, label, cls) => `<button data-a="${a}" class="${cls || ''}" aria-label="${a}">${label}</button>`;
+  if (id === 'password') pad.innerHTML = `<div class="padgrid">${B('up', '▲', 'u')}${B('left', '◀', 'l')}${B('down', '▼', 'd')}${B('right', '▶', 'r')}</div>`;
+  else if (id === 'nomad') pad.innerHTML = B('up', '⬆ Sauter') + B('down', '⬇ Se baisser');
+  else pad.innerHTML = B('left', '◀') + B('right', '▶');
+  pad.querySelectorAll('button').forEach(b => {
+    const a = b.dataset.a;
+    b.addEventListener('pointerdown', e => { e.preventDefault(); act(a, true); });
+    ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => b.addEventListener(ev, () => act(a, false)));
+    b.addEventListener('contextmenu', e => e.preventDefault());
+  });
+}
+function canvasXY(e) { const r = cv.getBoundingClientRect(); return { x: (e.clientX - r.left) * W / r.width, y: (e.clientY - r.top) * H / r.height }; }
+let pointerDown = false;
+cv.addEventListener('pointerdown', e => { pointerDown = true; if (G && G.running && !G.paused && ENG[G.id].pointer) { const p = canvasXY(e); ENG[G.id].pointer('down', p.x, p.y, e); } });
+cv.addEventListener('pointermove', e => { if (G && G.running && !G.paused && ENG[G.id].pointer && (pointerDown || e.pointerType === 'mouse')) { const p = canvasXY(e); ENG[G.id].pointer('move', p.x, p.y, e); } });
+addEventListener('pointerup', () => { pointerDown = false; });
+
+/* =====================================================================
+   MOTEURS DE JEU
+   ===================================================================== */
+const ENG = {};
+
+/* ---------------------------------------------------------------------
+   MODULE 1 — SERPENT (grandit à chaque brique, game over si morsure)
+   --------------------------------------------------------------------- */
+ENG.password = {
+  intro: "Dirige le serpent vers les briques. Chaque brique déclenche un défi cyber, et ton serpent grandit à chaque fois !",
+  rules: ["Flèches ou ZQSD (ou boutons / glisser du doigt) pour te diriger.", "Chaque brique mangée met le jeu en pause et pose une question à 3 choix.", "Le serpent s'allonge à chaque brique : attention à ne pas te mordre la queue, sinon <b>game over</b>.", "Les murs sont traversables : tu ressors de l'autre côté."],
+  COLS: 24, ROWS: 16, C: 30,
+  init() {
+    this.snake = [{ x: 12, y: 8 }, { x: 11, y: 8 }, { x: 10, y: 8 }];
+    this.dir = { x: 1, y: 0 }; this.q = []; this.acc = 0; this.swipe = null;
+    this.placeBrick();
+  },
+  hud() { return `Longueur : ${this.snake.length}`; },
+  placeBrick() {
+    let p; do { p = { x: randInt(this.COLS), y: randInt(this.ROWS) }; } while (this.snake.some(s => s.x === p.x && s.y === p.y));
+    this.brick = p;
+  },
+  stepTime() { return Math.max(.085, .16 - this.snake.length * .0022); },
+  update(dt) {
+    this.acc += dt;
+    while (this.acc >= this.stepTime() && !G.paused && G.running) { this.acc -= this.stepTime(); this.step(); }
+  },
+  step() {
+    const d = this.q.length ? this.q.shift() : this.dir; this.dir = d;
+    const h = this.snake[0];
+    const nx = (h.x + d.x + this.COLS) % this.COLS, ny = (h.y + d.y + this.ROWS) % this.ROWS;
+    const eat = nx === this.brick.x && ny === this.brick.y;
+    const body = eat ? this.snake : this.snake.slice(0, -1);   // la queue avance si on ne mange pas
+    if (body.some(s => s.x === nx && s.y === ny)) { beep(160, .3, 'sawtooth'); gameOver('Le serpent s\'est mordu la queue !'); return; }
+    this.snake.unshift({ x: nx, y: ny });
+    if (eat) { this.placeBrick(); updateHud(); beep(520, .08); ask(); }   // pas de pop() : le serpent grandit
+    else this.snake.pop();
+  },
+  input(a, down) {
+    if (!down) return;
+    const M = { left: { x: -1, y: 0 }, right: { x: 1, y: 0 }, up: { x: 0, y: -1 }, down: { x: 0, y: 1 } };
+    const d = M[a]; if (!d) return;
+    const ref = this.q.length ? this.q[this.q.length - 1] : this.dir;
+    if ((d.x === -ref.x && d.y === -ref.y) || (d.x === ref.x && d.y === ref.y)) return;
+    if (this.q.length < 3) this.q.push(d);
+  },
+  pointer(type, x, y) {      // glisser du doigt
+    if (type === 'down') { this.swipe = { x, y }; return; }
+    if (!this.swipe) return;
+    const dx = x - this.swipe.x, dy = y - this.swipe.y;
+    if (Math.hypot(dx, dy) > 30) { this.input(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : (dy > 0 ? 'down' : 'up'), true); this.swipe = { x, y }; }
+  },
+  draw() {
+    const c = this.C;
+    ctx.fillStyle = '#071423'; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = '#0e2238'; ctx.lineWidth = 1;
+    for (let i = 0; i <= this.COLS; i++) { ctx.beginPath(); ctx.moveTo(i * c, 0); ctx.lineTo(i * c, H); ctx.stroke(); }
+    for (let j = 0; j <= this.ROWS; j++) { ctx.beginPath(); ctx.moveTo(0, j * c); ctx.lineTo(W, j * c); ctx.stroke(); }
+    // brique
+    const b = this.brick;
+    ctx.fillStyle = '#e8873a'; rr(b.x * c + 2, b.y * c + 4, c - 4, c - 8, 3); ctx.fill();
+    ctx.strokeStyle = '#ffd8a8'; ctx.lineWidth = 1.5; ctx.beginPath();
+    ctx.moveTo(b.x * c + 2, b.y * c + c / 2); ctx.lineTo(b.x * c + c - 2, b.y * c + c / 2); ctx.moveTo(b.x * c + c / 2, b.y * c + 4); ctx.lineTo(b.x * c + c / 2, b.y * c + c / 2); ctx.stroke();
+    // serpent
+    this.snake.forEach((s, i) => {
+      ctx.fillStyle = i === 0 ? '#7dffc4' : (i % 2 ? '#2fc98a' : '#27b87c');
+      rr(s.x * c + 2, s.y * c + 2, c - 4, c - 4, i === 0 ? 10 : 7); ctx.fill();
+    });
+    const h = this.snake[0], d = this.dir, cx = h.x * c + c / 2, cy = h.y * c + c / 2;
+    ctx.fillStyle = '#062033';
+    [[-1, 1], [1, 1]].forEach(([k]) => { const ox = d.x !== 0 ? d.x * 5 : k * 6, oy = d.y !== 0 ? d.y * 5 : k * 6; ctx.beginPath(); ctx.arc(cx + ox, cy + oy, 3, 0, 7); ctx.fill(); });
+  }
+};
+
+/* ---------------------------------------------------------------------
+   MODULE 2 — VAISSEAU SUR 3 VOIES
+   --------------------------------------------------------------------- */
+ENG.phishing = {
+  intro: "Pilote ton vaisseau sur 3 voies : évite les hameçons et fonce sur les « ? » pour relever les défis.",
+  rules: ["Flèches gauche / droite (ou Q / D, boutons, toucher gauche / droite de l'écran) pour changer de voie.", "Évite les hameçons 🎣 et les menaces : chaque impact coûte 1 énergie.", "Chaque « ? » touché met le jeu en pause et pose une question.", "Une bonne réponse redonne 1 énergie. À 0 énergie, c'est <b>game over</b>."],
+  laneX(i) { return W / 3 * (i + .5); },
+  init() {
+    this.lane = 1; this.x = this.laneX(1); this.objs = []; this.since = 0; this.gap = 150; this.off = 0; this.energy = 3; this.inv = 1; this.t = 0;
+  },
+  hud() { return `Énergie : ${hearts(this.energy)}`; },
+  resume() { this.inv = 1.2; },
+  speed() { return 230 + Math.min(110, G.n * 11); },
+  input(a, down) {
+    if (!down) return;
+    if (a === 'left') this.lane = Math.max(0, this.lane - 1);
+    if (a === 'right') this.lane = Math.min(2, this.lane + 1);
+  },
+  pointer(type, x) { if (type === 'down') this.input(x < W / 2 ? 'left' : 'right', true); },
+  spawnRow() {
+    const hasQ = this.objs.some(o => o.k === 'q');
+    let qLane = -1;
+    if (!hasQ && G.n < 10 && Math.random() < .6) qLane = randInt(3);
+    const free = [0, 1, 2].filter(l => l !== qLane);
+    const count = Math.random() < .45 ? 2 : 1;
+    shuffle(free).slice(0, qLane >= 0 ? count : Math.min(count, 2)).forEach(l => this.objs.push({ k: 'obs', lane: l, y: -40, e: ['🎣', '☠️', '🦠'][randInt(3)] }));
+    if (qLane >= 0) this.objs.push({ k: 'q', lane: qLane, y: -40 });
+  },
+  update(dt) {
+    const sp = this.speed(); this.t += dt;
+    this.off = (this.off + sp * dt) % 40;
+    this.inv = Math.max(0, this.inv - dt);
+    this.x += (this.laneX(this.lane) - this.x) * Math.min(1, dt * 14);
+    this.since += sp * dt;
+    if (this.since >= this.gap) { this.since = 0; this.gap = rand(190, 280); this.spawnRow(); }
+    const sy = H - 85;
+    for (const o of this.objs) {
+      o.y += sp * dt;
+      if (Math.abs(o.y - sy) < 34 && Math.abs(this.laneX(o.lane) - this.x) < 62 && !o.done) {
+        if (o.k === 'q') { o.done = true; beep(700, .08); ask(); break; }
+        if (this.inv <= 0) {
+          o.done = true; this.energy--; this.inv = 1.4; beep(150, .25, 'sawtooth'); updateHud();
+          if (this.energy <= 0) { gameOver('Ton vaisseau n\'a plus d\'énergie !'); return; }
+        }
+      }
+    }
+    this.objs = this.objs.filter(o => !o.done && o.y < H + 50);
+  },
+  onAnswer(ok) { if (ok && this.energy < 3) this.energy++; },
+  draw() {
+    const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#050b18'); g.addColorStop(1, '#0c1f3a');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = '#2b4a74'; ctx.lineWidth = 3; ctx.setLineDash([22, 18]); ctx.lineDashOffset = -this.off * 1.5;
+    [W / 3, 2 * W / 3].forEach(x => { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); });
+    ctx.setLineDash([]);
+    for (const o of this.objs) {
+      const x = this.laneX(o.lane);
+      if (o.k === 'obs') { ctx.fillStyle = '#4a1224'; ctx.beginPath(); ctx.arc(x, o.y, 30, 0, 7); ctx.fill(); ctx.strokeStyle = '#ff6684'; ctx.lineWidth = 3; ctx.stroke(); ctx.fillStyle = '#fff'; emo(o.e, x, o.y, 34); }
+      else { ctx.save(); ctx.shadowColor = '#ffcb66'; ctx.shadowBlur = 20; ctx.fillStyle = '#ffcb66'; ctx.beginPath(); ctx.arc(x, o.y, 28, 0, 7); ctx.fill(); ctx.restore(); ctx.fillStyle = '#3a2800'; ctx.font = 'bold 34px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('?', x, o.y + 2); }
+    }
+    if (this.inv > 0 && Math.floor(this.inv * 10) % 2 === 0) ctx.globalAlpha = .35;
+    const sx = this.x, sy = H - 85;
+    ctx.fillStyle = '#ff9d3a'; ctx.beginPath(); ctx.moveTo(sx - 9, sy + 26); ctx.lineTo(sx, sy + 26 + 14 + Math.random() * 8); ctx.lineTo(sx + 9, sy + 26); ctx.fill();
+    ctx.fillStyle = '#49e5da'; ctx.beginPath(); ctx.moveTo(sx, sy - 30); ctx.lineTo(sx + 26, sy + 26); ctx.lineTo(sx, sy + 14); ctx.lineTo(sx - 26, sy + 26); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#062033'; ctx.beginPath(); ctx.arc(sx, sy, 6, 0, 7); ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+};
+
+/* ---------------------------------------------------------------------
+   MODULE 3 — CASSE-BRIQUES (briques dorées « ? » = question)
+   --------------------------------------------------------------------- */
+ENG.social = {
+  intro: "Renvoie la balle pour détruire les briques. Les briques dorées « ? » cachent un défi cyber !",
+  rules: ["Souris / doigt (glisser) ou flèches gauche / droite pour déplacer la raquette.", "Détruis les <b>10 briques dorées « ? »</b> : chacune pose une question.", "Tu as 3 balles : si tu laisses tomber la balle trois fois, c'est <b>game over</b>.", "La balle part toute seule après un court instant."],
+  init() {
+    this.pad = W / 2; this.pw = 110; this.padY = H - 34; this.held = { left: false, right: false };
+    this.lives = 3; this.bricks = [];
+    const cols = 10, rows = 5, bw = 64, bh = 24, gap = 4, ox = (W - (cols * (bw + gap) - gap)) / 2, oy = 54;
+    const qset = new Set(shuffle([...Array(cols * rows).keys()]).slice(0, 10));
+    const colors = ['#ff6684', '#ff9d3a', '#4be39a', '#49e5da', '#9e7cff'];
+    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+      const i = r * cols + c;
+      this.bricks.push({ x: ox + c * (bw + gap), y: oy + r * (bh + gap), w: bw, h: bh, alive: true, q: qset.has(i), col: colors[r] });
+    }
+    this.resetBall();
+  },
+  hud() { return `Balles : ${hearts(this.lives)}`; },
+  resetBall() { this.launched = false; this.wait = 1.1; this.ball = { x: this.pad, y: this.padY - 10, vx: 0, vy: 0, r: 8 }; },
+  speed() { return 330 + G.n * 9; },
+  input(a, down) { if (a === 'left' || a === 'right') this.held[a] = down; },
+  pointer(type, x) { this.pad = clamp(x, this.pw / 2, W - this.pw / 2); },
+  update(dt) {
+    const dir = (this.held.right ? 1 : 0) - (this.held.left ? 1 : 0);
+    this.pad = clamp(this.pad + dir * 560 * dt, this.pw / 2, W - this.pw / 2);
+    const b = this.ball;
+    if (!this.launched) {
+      b.x = this.pad; b.y = this.padY - 10; this.wait -= dt;
+      if (this.wait <= 0) { const s = this.speed(), a = rand(-.5, .5); b.vx = s * Math.sin(a); b.vy = -s * Math.cos(a); this.launched = true; }
+      return;
+    }
+    // normalise la vitesse
+    const s = this.speed(), v = Math.hypot(b.vx, b.vy) || 1; b.vx *= s / v; b.vy *= s / v;
+    b.x += b.vx * dt; b.y += b.vy * dt;
+    if (b.x < b.r) { b.x = b.r; b.vx = Math.abs(b.vx); }
+    if (b.x > W - b.r) { b.x = W - b.r; b.vx = -Math.abs(b.vx); }
+    if (b.y < b.r) { b.y = b.r; b.vy = Math.abs(b.vy); }
+    // raquette
+    if (b.vy > 0 && b.y + b.r >= this.padY && b.y + b.r <= this.padY + 20 && Math.abs(b.x - this.pad) <= this.pw / 2 + b.r) {
+      const rel = clamp((b.x - this.pad) / (this.pw / 2), -1, 1), ang = rel * 1.05;
+      b.vx = s * Math.sin(ang); b.vy = -s * Math.cos(ang); b.y = this.padY - b.r; beep(400, .04);
+    }
+    // balle perdue
+    if (b.y > H + 20) {
+      this.lives--; updateHud(); beep(150, .25, 'sawtooth');
+      if (this.lives <= 0) { gameOver('Tu n\'as plus de balles !'); return; }
+      this.resetBall(); return;
+    }
+    // briques (une collision par image)
+    for (const k of this.bricks) {
+      if (!k.alive) continue;
+      const cx = clamp(b.x, k.x, k.x + k.w), cy = clamp(b.y, k.y, k.y + k.h), dx = b.x - cx, dy = b.y - cy;
+      if (dx * dx + dy * dy < b.r * b.r) {
+        if (Math.abs(dx) > Math.abs(dy)) b.vx = dx > 0 ? Math.abs(b.vx) : -Math.abs(b.vx); else b.vy = dy > 0 ? Math.abs(b.vy) : -Math.abs(b.vy);
+        k.alive = false; beep(560, .05);
+        if (k.q) ask();
+        break;
+      }
+    }
+  },
+  draw() {
+    const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#0a1630'); g.addColorStop(1, '#06101d');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    for (const k of this.bricks) {
+      if (!k.alive) continue;
+      if (k.q) { ctx.save(); ctx.shadowColor = '#ffcb66'; ctx.shadowBlur = 12; ctx.fillStyle = '#ffcb66'; rr(k.x, k.y, k.w, k.h, 5); ctx.fill(); ctx.restore(); ctx.fillStyle = '#3a2800'; ctx.font = 'bold 18px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('?', k.x + k.w / 2, k.y + k.h / 2 + 1); }
+      else { ctx.fillStyle = k.col; rr(k.x, k.y, k.w, k.h, 5); ctx.fill(); ctx.fillStyle = '#ffffff33'; rr(k.x + 3, k.y + 3, k.w - 6, 5, 2); ctx.fill(); }
+    }
+    ctx.fillStyle = '#49e5da'; rr(this.pad - this.pw / 2, this.padY, this.pw, 14, 7); ctx.fill();
+    const b = this.ball; ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, 7); ctx.fill();
+    if (!this.launched && G.running) { ctx.fillStyle = '#edf6ff'; ctx.font = 'bold 20px sans-serif'; ctx.textAlign = 'center'; ctx.fillText('Prêt ?', W / 2, H / 2 + 60); }
+  }
+};
+
+/* ---------------------------------------------------------------------
+   MODULE 4 — DINO NOMADE (sauter / se baisser)
+   --------------------------------------------------------------------- */
+ENG.nomad = {
+  intro: "Ton dino traverse la ville avec sa valise : saute ou baisse-toi selon l'obstacle, et franchis les points de contrôle.",
+  rules: ["<b>Espace / ↑</b> (ou bouton, ou toucher l'écran) pour sauter les valises 🧳.", "<b>↓</b> (maintenu) pour te baisser sous les avions ✈️.", "Chaque point de contrôle « ? » pose une question (tu le traverses sans risque).", "3 vies : à 0, c'est <b>game over</b>."],
+  GROUND: H - 90,
+  init() {
+    this.h = 0; this.vy = 0; this.duck = false; this.objs = []; this.since = 0; this.gap = 320; this.off = 0; this.lives = 3; this.inv = 1;
+    this.gates = 0; this.sinceGate = 0; this.nextGate = 3; this.clouds = [{ x: 100, y: 70 }, { x: 420, y: 110 }, { x: 640, y: 50 }];
+  },
+  hud() { return `Vies : ${hearts(this.lives)}`; },
+  resume() { this.inv = 1.2; },
+  speed() { return 320 + Math.min(150, G.n * 15); },
+  input(a, down) {
+    if (a === 'up' && down && this.h === 0) { this.vy = 790; beep(500, .06); }
+    if (a === 'down') this.duck = down;
+  },
+  pointer(type) { if (type === 'down') this.input('up', true); },
+  box() { const w = this.duck && this.h === 0 ? 54 : 40, hh = this.duck && this.h === 0 ? 28 : 48; return { x: 90, y: this.GROUND - this.h - hh, w, h: hh }; },
+  spawn() {
+    const x = W + 40;
+    if (this.gates < 10 && this.sinceGate >= this.nextGate && !this.objs.some(o => o.k === 'gate')) {
+      this.objs.push({ k: 'gate', x, w: 30 }); this.gates++; this.sinceGate = 0; this.nextGate = 2 + randInt(2); this.gap = 520; return;
+    }
+    this.sinceGate++;
+    if (Math.random() < .62) this.objs.push({ k: 'low', x, w: 36, h: 40 });
+    else this.objs.push({ k: 'air', x, w: 46, h: 28 });
+    this.gap = rand(400, 640);
+  },
+  update(dt) {
+    const sp = this.speed();
+    this.off = (this.off + sp * dt) % 40; this.inv = Math.max(0, this.inv - dt);
+    // physique du saut
+    if (this.h > 0 || this.vy > 0) {
+      this.vy -= (this.duck ? 4200 : 2300) * dt; this.h += this.vy * dt;
+      if (this.h <= 0) { this.h = 0; this.vy = 0; }
+    }
+    this.clouds.forEach(c => { c.x -= sp * .15 * dt; if (c.x < -60) { c.x = W + 60; c.y = rand(40, 130); } });
+    this.since += sp * dt;
+    if (this.since >= this.gap) { this.since = 0; this.spawn(); }
+    const me = this.box();
+    for (const o of this.objs) {
+      o.x -= sp * dt;
+      if (o.k === 'gate') {
+        if (!o.done && o.x < me.x + me.w) { o.done = true; beep(700, .08); ask(); break; }
+        continue;
+      }
+      if (o.done) continue;
+      const oy = o.k === 'low' ? this.GROUND - o.h : this.GROUND - 62;
+      const hit = me.x + 6 < o.x + o.w && me.x + me.w - 6 > o.x && me.y + 4 < oy + o.h && me.y + me.h - 4 > oy;
+      if (hit && this.inv <= 0) {
+        o.done = true; this.lives--; this.inv = 1.4; beep(150, .25, 'sawtooth'); updateHud();
+        if (this.lives <= 0) { gameOver('Ton dino n\'a plus de vies !'); return; }
+      }
+    }
+    this.objs = this.objs.filter(o => !o.done && o.x > -80);
+  },
+  draw() {
+    const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#12315c'); g.addColorStop(1, '#2a5a8a');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#ffffff22'; this.clouds.forEach(c => { ctx.beginPath(); ctx.ellipse(c.x, c.y, 46, 16, 0, 0, 7); ctx.fill(); });
+    ctx.fillStyle = '#0d2238'; ctx.fillRect(0, this.GROUND, W, H - this.GROUND);
+    ctx.strokeStyle = '#49e5da'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(0, this.GROUND); ctx.lineTo(W, this.GROUND); ctx.stroke();
+    ctx.strokeStyle = '#294568'; ctx.lineWidth = 2;
+    for (let x = -this.off; x < W; x += 40) { ctx.beginPath(); ctx.moveTo(x, this.GROUND + 18); ctx.lineTo(x + 18, this.GROUND + 18); ctx.stroke(); }
+    for (const o of this.objs) {
+      if (o.k === 'low') emo('🧳', o.x + o.w / 2, this.GROUND - o.h / 2, 44);
+      else if (o.k === 'air') emo('✈️', o.x + o.w / 2, this.GROUND - 48, 46);
+      else {
+        ctx.save(); ctx.shadowColor = '#ffcb66'; ctx.shadowBlur = 16; ctx.strokeStyle = '#ffcb66'; ctx.lineWidth = 6;
+        ctx.beginPath(); ctx.moveTo(o.x, this.GROUND); ctx.lineTo(o.x, 70); ctx.lineTo(o.x + o.w, 70); ctx.lineTo(o.x + o.w, this.GROUND); ctx.stroke(); ctx.restore();
+        ctx.fillStyle = '#ffcb66'; ctx.beginPath(); ctx.arc(o.x + o.w / 2, 70, 22, 0, 7); ctx.fill();
+        ctx.fillStyle = '#3a2800'; ctx.font = 'bold 28px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('?', o.x + o.w / 2, 72);
+      }
+    }
+    const me = this.box();
+    if (this.inv > 0 && Math.floor(this.inv * 10) % 2 === 0) ctx.globalAlpha = .35;
+    ctx.save();
+    if (this.duck && this.h === 0) { ctx.translate(me.x + me.w / 2, me.y + me.h); ctx.scale(1.25, .6); emo('🦖', 0, -26, 52); }
+    else emo('🦖', me.x + me.w / 2, me.y + me.h / 2 + 2, 52);
+    ctx.restore(); ctx.globalAlpha = 1;
+  }
+};
+
+/* =====================================================================
+   DÉMARRAGE
+   ===================================================================== */
+buildHome();
+})();
+</script>
+</body>
+</html>
